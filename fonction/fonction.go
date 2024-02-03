@@ -5,21 +5,37 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strings"
 	"time"
 )
 
-var DecodeData Data
+var DecodeData DataSearch
 
-type Data []struct {
+type DataSearch []struct {
 	Translations struct {
 		Fra struct {
 			Common string `json:"common"`
 		} `json:"fra"`
 	} `json:"translations"`
+	Independent bool    `json:"independent"`
+	Area        float64 `json:"area"`
+	Flags       struct {
+		Png string `json:"png"`
+	} `json:"flags"`
+	Population float64 `json:"population"`
 }
 
-func Gettranslationcountry() {
-	URLbasewinner := "https://restcountries.com/v3.1/translation/Germany"
+type SearchResults struct {
+	Name string
+	Flag string
+	Area int
+	Pop  int
+}
+
+// requête pour récupérer les données d'un pays via une recherche user (recherche en Français)
+func SearchCountry(usersearch string) []SearchResults {
+
+	URLSearch := "https://restcountries.com/v3.1/translation/" + usersearch
 
 	//Init Client
 	httpClient := http.Client{
@@ -27,10 +43,10 @@ func Gettranslationcountry() {
 	}
 
 	//Créer requête HTTP
-	req, errReq := http.NewRequest(http.MethodGet, URLbasewinner, nil)
+	req, errReq := http.NewRequest(http.MethodGet, URLSearch, nil)
 	if errReq != nil {
 		fmt.Println("Erreur avec la requête : ", errReq.Error())
-		return
+
 	}
 
 	//Exécution HTTP
@@ -49,9 +65,48 @@ func Gettranslationcountry() {
 	if err := json.Unmarshal(body, &DecodeData); err != nil {
 		fmt.Println("Erreur lors du décodage des données JSON (Nom problablement incorrect)")
 		fmt.Println("Réponse JSON reçue:", string(body))
-		return
+
 	}
-	for _, country := range DecodeData {
-		fmt.Printf("Nom français : %s\n", country.Translations.Fra.Common)
+
+	var searchResults []SearchResults
+	for _, c := range DecodeData {
+		if strings.Contains(strings.ToLower(c.Translations.Fra.Common), strings.ToLower(usersearch)) {
+			result := SearchResults{
+				Name: c.Translations.Fra.Common,
+				Flag: c.Flags.Png,
+				Area: int(c.Area),
+				Pop:  int(c.Population),
+			}
+			searchResults = append(searchResults, result)
+		}
 	}
+	return searchResults
+}
+
+// Met des espaces tous les 3 nombres pour rendre le tout lisible
+func addThousandsSeparator(s string) string {
+	n := len(s)
+	if n <= 3 {
+		return s
+	}
+	return addThousandsSeparator(s[:n-3]) + " " + s[n-3:]
+}
+
+// Formate l'aire récuperé pour la rendre lisible facilement en enlevant les 0 après le "."
+func formatNumber(Number float64) string {
+
+	areaStr := fmt.Sprintf("%.0f", Number)
+
+	parts := strings.Split(areaStr, ".")
+
+	// Récupérer la partie entière
+	intPart := parts[0]
+
+	formattedIntPart := addThousandsSeparator(intPart)
+
+	if len(parts) > 1 {
+		return formattedIntPart + "." + parts[1]
+	}
+
+	return formattedIntPart
 }

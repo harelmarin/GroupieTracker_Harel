@@ -1,11 +1,11 @@
 package main
 
 import (
-	"Groupie/fonction"
+	"Groupie/routeur"
+	InitTemplate "Groupie/templates"
 )
 
 func main() {
-	//initTemplate.InitTemplate()
-	//routeur.Serveur()
-	fonction.Gettranslationcountry()
+	InitTemplate.InitTemplate()
+	routeur.Serveur()
 }

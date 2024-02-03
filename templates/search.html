@@ -1,4 +1,4 @@
-{{define "index"}}
+{{define "search"}}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,27 +7,35 @@
     <meta name="viewport" content="width=devicewidth, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/base.css" />
     <link rel="stylesheet" href="/static/css/style.css" />
-    <title>INDEX</title>
+    <title>SEARCH</title>
 </head>
 <body>
 <header>
 
     <nav>
-    <a href="Caté"> Afrique </a>
-    <a href="Caté"> Amérique </a>
-    <a href="Caté"> Asie </a>
-    <a href="Caté"> Europe </a>
-    <a href="Caté"> Océanie </a>
+    <a href="Caté"> Catégories </a>
+    <a href="Caté"> Catégories </a>
+    <a href="Caté"> Catégories </a>
     </nav>
 
     <form action="/search" method="GET">
     <input type="text" name="usersearch" autocomplete="off" placeholder="Search . . . ">
+
     </form>
 
 </header>
+<div>
+    SEARCH
+    {{range .}}
+    <p>Area: {{.Area}} km²</p>
+    <h2>{{.Name}}</h2>
+    <p>Population: {{.Pop}}</p>
+    <img src="{{.Flag}}" alt="Flag">
+    {{end}}
+</div>
 
 
-dfzfz
+
 
 
 

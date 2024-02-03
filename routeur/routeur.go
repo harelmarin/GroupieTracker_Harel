@@ -11,6 +11,9 @@ import (
 func Serveur() {
 	http.HandleFunc("/index", controller.DataIndex)
 	http.HandleFunc("/treatment/index", controller.TreatmentIndex)
+	http.HandleFunc("/search", controller.DataRecherche)
+	http.HandleFunc("/treatmentsearch", controller.TreatmentCaté)
+
 	rootDoc, _ := os.Getwd()
 	fileserver := http.FileServer(http.Dir(rootDoc + "/asset"))
 	http.Handle("/static/", http.StripPrefix("/static/", fileserver))
