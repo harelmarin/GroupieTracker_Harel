@@ -9,10 +9,10 @@ import (
 )
 
 func Serveur() {
-	http.HandleFunc("/index", controller.DataIndex)
-	http.HandleFunc("/treatment/index", controller.TreatmentIndex)
-	http.HandleFunc("/search", controller.DataRecherche)
-	http.HandleFunc("/treatmentsearch", controller.TreatmentCaté)
+	http.HandleFunc("/index", controller.IndexHandler)
+	http.HandleFunc("/treatment/index", controller.IndexTreatmentHandler)
+	http.HandleFunc("/search", controller.RechercheHandler) //Query => /search?usersearch=""
+	http.HandleFunc("/category", controller.CateHandler)
 
 	rootDoc, _ := os.Getwd()
 	fileserver := http.FileServer(http.Dir(rootDoc + "/asset"))

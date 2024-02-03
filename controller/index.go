@@ -6,27 +6,32 @@ import (
 	"net/http"
 )
 
-func DataIndex(w http.ResponseWriter, r *http.Request) {
+func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	InitTemplate.Temp.ExecuteTemplate(w, "index", fonction.DecodeData)
 }
 
-func TreatmentIndex(w http.ResponseWriter, r *http.Request) {
+func IndexTreatmentHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Redirect(w, r, "/index", http.StatusSeeOther)
 		return
 	}
 }
 
-func TreatmentCaté(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		http.Redirect(w, r, "/index", http.StatusSeeOther)
+func CateHandler(w http.ResponseWriter, r *http.Request) {
+	if !r.URL.Query().Has("category") {
 		return
 	}
+	Category := r.URL.Query().Get("category")
+	searchcategory := fonction.GetContinent(Category)
+	if len(searchcategory) == 0 {
+		http.Error(w, "Not Found: No results found", http.StatusNotFound)
+		return
+	}
+	InitTemplate.Temp.ExecuteTemplate(w, "category", searchcategory)
 }
 
-func DataRecherche(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		http.Redirect(w, r, "/index", http.StatusSeeOther)
+func RechercheHandler(w http.ResponseWriter, r *http.Request) {
+	if !r.URL.Query().Has("usersearch") {
 		return
 	}
 

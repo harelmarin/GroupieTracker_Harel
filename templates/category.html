@@ -1,4 +1,4 @@
-{{define "index"}}
+{{define "category"}}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=devicewidth, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/base.css" />
     <link rel="stylesheet" href="/static/css/style.css" />
-    <title>INDEX</title>
+    <title>CATEGORY</title>
 </head>
 <body>
 <header>
@@ -22,12 +22,22 @@
 
     <form action="/search" method="GET">
     <input type="text" name="usersearch" autocomplete="off" placeholder="Search . . . ">
+
     </form>
 
 </header>
+<div>
+    SEARCH
+    {{range .}}
+    <p>Area: {{.Area}} km²</p>
+    <h2>{{.Name}}</h2>
+    <p>Population: {{.Pop}}</p>
+    <img src="{{.Flag}}" alt="Flag">
+    {{end}}
+</div>
 
 
-dfzfz
+
 
 
 

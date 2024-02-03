@@ -13,10 +13,12 @@
 <header>
 
     <nav>
-    <a href="Caté"> Catégories </a>
-    <a href="Caté"> Catégories </a>
-    <a href="Caté"> Catégories </a>
-    </nav>
+        <a href="/category?category=africa"> Afrique </a>
+        <a href="/category?category=america"> Amérique </a>
+        <a href="/category?category=asia"> Asie </a>
+        <a href="/category?category=europe"> Europe </a>
+        <a href="/category?category=oceania"> Océanie </a>
+        </nav>
 
     <form action="/search" method="GET">
     <input type="text" name="usersearch" autocomplete="off" placeholder="Search . . . ">
@@ -25,7 +27,6 @@
 
 </header>
 <div>
-    SEARCH
     {{range .}}
     <p>Area: {{.Area}} km²</p>
     <h2>{{.Name}}</h2>
