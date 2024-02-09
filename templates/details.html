@@ -1,4 +1,4 @@
-{{define "search"}}
+{{define "details"}}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -26,22 +26,29 @@
     </form>
 
 </header>
-<section class="container-global">
-    {{range .}}
-    <div class="container-country">
-        <a href="/details?country={{.Name}}"> <img src="{{.Flag}}" alt="Flag"> 
-    <h2>{{.Name}}</h2>
-    </div>
+<div class="details">
+    <section class="container-details">
+    {{ range $index, $element := . }}
+        {{ if eq $index 0 }}
+        <img src="{{.Flag}}" alt="Flag">
+        <div class="details-infos">
+            <h2>{{.Name}}</h2>
+            <h3>Continent : {{.Reg}} </h3><br>
+            <h3>Aire : {{.Area}} km² </h3><br>
+            <h3>Population : {{.Pop}} Habitants </h3><br>
+            <div class="button_slide slide_right"> Favoris </div>
+        </div>
+        {{end}}
     {{end}}
-</section>
+    </section>
+
+</div>
 
 
 
 <footer>
-zffz
-</footer>
-</body>
-{{end}}
-
-
-
+    zffz
+    </footer>
+    </body>
+    {{end}}
+    

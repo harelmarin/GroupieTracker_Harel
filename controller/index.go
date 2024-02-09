@@ -22,6 +22,7 @@ func CateHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	Category := r.URL.Query().Get("category")
+
 	searchcategory := fonction.GetContinent(Category)
 	if len(searchcategory) == 0 {
 		http.Error(w, "Not Found: No results found", http.StatusNotFound)
@@ -41,5 +42,24 @@ func RechercheHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Not Found: No results found", http.StatusNotFound)
 		return
 	}
+
 	InitTemplate.Temp.ExecuteTemplate(w, "search", searchResults)
+}
+
+func DetailsHandler(w http.ResponseWriter, r *http.Request) {
+	countryname := r.URL.Query().Get("country")
+	Country := fonction.SearchCountry(countryname)
+	if len(Country) == 0 {
+		http.Error(w, "Not Found: No results found", http.StatusNotFound)
+		return
+	}
+	InitTemplate.Temp.ExecuteTemplate(w, "details", Country)
+}
+
+func CreateUserHandler(w http.ResponseWriter, r *http.Request) {
+	InitTemplate.Temp.ExecuteTemplate(w, "createuser", nil)
+}
+
+func CreateUserTreatmentHandler(w http.ResponseWriter, r *http.Request) {
+
 }

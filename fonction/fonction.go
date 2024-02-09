@@ -23,13 +23,15 @@ type DataSearch []struct {
 		Png string `json:"png"`
 	} `json:"flags"`
 	Population float64 `json:"population"`
+	Region     string  `json:"region"`
 }
-
 type SearchResults struct {
-	Name string
-	Flag string
-	Area int
-	Pop  int
+	Name   string
+	Flag   string
+	Area   int
+	Pop    int
+	Reg    string
+	NbPage int
 }
 
 // requête pour récupérer les données d'un pays via une recherche user (recherche en Français)
@@ -76,6 +78,7 @@ func SearchCountry(usersearch string) []SearchResults {
 				Flag: c.Flags.Png,
 				Area: int(c.Area),
 				Pop:  int(c.Population),
+				Reg:  c.Region,
 			}
 			searchResults = append(searchResults, result)
 		}

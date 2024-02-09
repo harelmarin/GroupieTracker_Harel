@@ -1,4 +1,4 @@
-{{define "search"}}
+{{define "createuser"}}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=devicewidth, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/base.css" />
     <link rel="stylesheet" href="/static/css/style.css" />
-    <title>SEARCH</title>
+    <title>CreateUser</title>
 </head>
-<body>
+<body class="align">
 <header>
 
     <nav>
@@ -19,21 +19,15 @@
         <a href="/category?category=europe"> Europe </a>
         <a href="/category?category=oceania"> Océanie </a>
         </nav>
-
+        <body>
     <form action="/search" method="GET">
     <input type="text" name="usersearch" autocomplete="off" placeholder="Search . . . ">
 
     </form>
 
 </header>
-<section class="container-global">
-    {{range .}}
-    <div class="container-country">
-        <a href="/details?country={{.Name}}"> <img src="{{.Flag}}" alt="Flag"> 
-    <h2>{{.Name}}</h2>
-    </div>
-    {{end}}
-</section>
+
+
 
 
 

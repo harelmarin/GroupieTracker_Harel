@@ -13,6 +13,9 @@ func Serveur() {
 	http.HandleFunc("/treatment/index", controller.IndexTreatmentHandler)
 	http.HandleFunc("/search", controller.RechercheHandler) //Query => /search?usersearch=""
 	http.HandleFunc("/category", controller.CateHandler)
+	http.HandleFunc("/details", controller.DetailsHandler)       //Query => /details?country=""
+	http.HandleFunc("/createuser", controller.CreateUserHandler) // use query params: ?<input>=error (input: "pass" or "user")
+	http.HandleFunc("/createuser/treatment", controller.CreateUserTreatmentHandler)
 
 	rootDoc, _ := os.Getwd()
 	fileserver := http.FileServer(http.Dir(rootDoc + "/asset"))

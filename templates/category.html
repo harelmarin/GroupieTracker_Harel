@@ -26,20 +26,16 @@
     </form>
 
 </header>
-<div>
-    SEARCH
-    {{range .}}
-    <p>Area: {{.Area}} km²</p>
-    <h2>{{.Name}}</h2>
-    <p>Population: {{.Pop}}</p>
-    <img src="{{.Flag}}" alt="Flag">
-    {{end}}
-</div>
 
-
-
-
-
+    <section class="container-global">
+        {{range .}}
+        <div class="container-country">
+            <a href="/details?country={{.Name}}"> <img src="{{.Flag}}" alt="Flag"> 
+        <h2>{{.Name}}</h2> </a>
+        </div>
+        {{end}}
+    </section>
+    
 
 
 <footer>
