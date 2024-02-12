@@ -1,4 +1,4 @@
-{{define "category"}}
+{{define "favorite"}}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=devicewidth, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/base.css" />
     <link rel="stylesheet" href="/static/css/style.css" />
-    <title>CATEGORY</title>
+    <title>FAV</title>
 </head>
 <body>
 <header>
@@ -28,7 +28,7 @@
 </header>
 
     <section class="container-global">
-        {{range .}}
+        {{range .Favorite}}
         <div class="container-country">
             <a href="/details?country={{.Name}}"> <img src="{{.Flag}}" alt="Flag"> 
         <h2>{{.Name}}</h2> </a>
@@ -42,6 +42,7 @@
 zffz
 </footer>
 </body>
+</html>
 {{end}}
 
 

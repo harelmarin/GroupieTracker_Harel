@@ -24,14 +24,16 @@ type DataSearch []struct {
 	} `json:"flags"`
 	Population float64 `json:"population"`
 	Region     string  `json:"region"`
+	IsFavorite bool
 }
 type SearchResults struct {
-	Name   string
-	Flag   string
-	Area   int
-	Pop    int
-	Reg    string
-	NbPage int
+	Name       string
+	Flag       string
+	Area       int
+	Pop        int
+	Reg        string
+	NbPage     int
+	IsFavorite bool
 }
 
 // requête pour récupérer les données d'un pays via une recherche user (recherche en Français)
@@ -74,16 +76,19 @@ func SearchCountry(usersearch string) []SearchResults {
 	for _, c := range DecodeData {
 		if strings.Contains(strings.ToLower(c.Translations.Fra.Common), strings.ToLower(usersearch)) {
 			result := SearchResults{
-				Name: c.Translations.Fra.Common,
-				Flag: c.Flags.Png,
-				Area: int(c.Area),
-				Pop:  int(c.Population),
-				Reg:  c.Region,
+				Name:       c.Translations.Fra.Common,
+				Flag:       c.Flags.Png,
+				Area:       int(c.Area),
+				Pop:        int(c.Population),
+				Reg:        c.Region,
+				IsFavorite: bool(IsCountryFavorite(c.Translations.Fra.Common)),
 			}
 			searchResults = append(searchResults, result)
 		}
 	}
+	fmt.Println(searchResults)
 	return searchResults
+
 }
 
 // requête pour récupérer les données des pays du continent choisi

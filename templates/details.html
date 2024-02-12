@@ -20,10 +20,12 @@
         <a href="/category?category=oceania"> Océanie </a>
         </nav>
 
-    <form action="/search" method="GET">
-    <input type="text" name="usersearch" autocomplete="off" placeholder="Search . . . ">
-
-    </form>
+        <div class="header-search-login">
+            <form action="/search" method="GET">
+            <input type="text" name="usersearch" autocomplete="off" placeholder="Search . . . ">
+            </form>
+            <a href="/favorite"> FAV </a>
+        </div>
 
 </header>
 <div class="details">
@@ -36,10 +38,17 @@
             <h3>Continent : {{.Reg}} </h3><br>
             <h3>Aire : {{.Area}} km² </h3><br>
             <h3>Population : {{.Pop}} Habitants </h3><br>
-            <div class="button_slide slide_right"> Favoris </div>
+            {{if .IsFavorite}}
+          
+            <a href="/delete/treatment?country={{.Name}}&reg={{.Reg}}&area={{.Area}}&pop={{.Pop}}&flag={{.Flag}}"> <div class="button_slide slide_right"> Supprimer </div></a>
+            {{else}}
+        
+           <a href="/favorite/treatment?country={{.Name}}&reg={{.Reg}}&area={{.Area}}&pop={{.Pop}}&flag={{.Flag}}"> <div class="button_slide slide_right"> Favoris </div></a>
+            {{end}}
         </div>
         {{end}}
     {{end}}
+  
     </section>
 
 </div>
