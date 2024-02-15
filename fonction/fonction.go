@@ -27,13 +27,13 @@ type DataSearch []struct {
 	IsFavorite bool
 }
 type SearchResults struct {
-	Name       string
-	Flag       string
-	Area       int
-	Pop        int
-	Reg        string
-	NbPage     int
-	IsFavorite bool
+	Name        string
+	Flag        string
+	Area        int
+	Pop         int
+	Reg         string
+	Independent bool
+	IsFavorite  bool
 }
 
 // requête pour récupérer les données d'un pays via une recherche user (recherche en Français)
@@ -76,17 +76,17 @@ func SearchCountry(usersearch string) []SearchResults {
 	for _, c := range DecodeData {
 		if strings.Contains(strings.ToLower(c.Translations.Fra.Common), strings.ToLower(usersearch)) {
 			result := SearchResults{
-				Name:       c.Translations.Fra.Common,
-				Flag:       c.Flags.Png,
-				Area:       int(c.Area),
-				Pop:        int(c.Population),
-				Reg:        c.Region,
-				IsFavorite: bool(IsCountryFavorite(c.Translations.Fra.Common)),
+				Name:        c.Translations.Fra.Common,
+				Flag:        c.Flags.Png,
+				Area:        int(c.Area),
+				Pop:         int(c.Population),
+				Reg:         c.Region,
+				IsFavorite:  bool(IsCountryFavorite(c.Translations.Fra.Common)),
+				Independent: bool(c.Independent),
 			}
 			searchResults = append(searchResults, result)
 		}
 	}
-	fmt.Println(searchResults)
 	return searchResults
 
 }
@@ -126,18 +126,21 @@ func GetContinent(categorie string) []SearchResults {
 		fmt.Println("Réponse JSON reçue:", string(body))
 
 	}
-
 	var searchResults []SearchResults
 	for _, c := range DecodeData {
 		result := SearchResults{
-			Name: c.Translations.Fra.Common,
-			Flag: c.Flags.Png,
-			Area: int(c.Area),
-			Pop:  int(c.Population),
+			Name:        c.Translations.Fra.Common,
+			Flag:        c.Flags.Png,
+			Area:        int(c.Area),
+			Pop:         int(c.Population),
+			Reg:         c.Region,
+			IsFavorite:  bool(IsCountryFavorite(c.Translations.Fra.Common)),
+			Independent: bool(c.Independent),
 		}
 		searchResults = append(searchResults, result)
 	}
 	return searchResults
+
 }
 
 // Met des espaces tous les 3 nombres pour rendre le tout lisible
@@ -166,4 +169,12 @@ func formatNumber(Number float64) string {
 	}
 
 	return formattedIntPart
+}
+
+func CalculateTotalPages(NbResult int) int {
+	totalPages := NbResult / 10
+	if NbResult%10 != 0 {
+		totalPages++
+	}
+	return totalPages
 }

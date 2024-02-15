@@ -8,6 +8,7 @@ import (
 	"runtime"
 )
 
+// Struct info des Pays Favoris
 type FavoriteInfo struct {
 	Name       string `json:"name"`
 	Continent  string `json:"continent"`
@@ -17,12 +18,14 @@ type FavoriteInfo struct {
 	IsFavorite bool   `json:"isfavorite"`
 }
 
+// Constante pour le fichier Json
 var (
 	_, b, _, _ = runtime.Caller(0)
 	path       = filepath.Dir(b) + "\\"
 )
 var jsonfile = path + "../content\\data.json"
 
+// Lit le fichier Json pour retrouver toutes les infos des favoris
 func RetrieveFavorite() ([]FavoriteInfo, error) {
 	var Fav []FavoriteInfo
 
@@ -76,6 +79,7 @@ func AddFav(info FavoriteInfo) {
 	}
 }
 
+// Remove le pays en favoris
 func RemoveFavorite(countryName string) error {
 
 	favs, err := RetrieveFavorite()
@@ -101,6 +105,7 @@ func RemoveFavorite(countryName string) error {
 	return nil
 }
 
+// Fonction pour savoir si le pays est dans les favoris ou pas ||| Si oui => return true
 func IsCountryFavorite(countryName string) bool {
 	favs, err := RetrieveFavorite()
 	if err != nil {
