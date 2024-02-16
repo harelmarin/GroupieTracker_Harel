@@ -65,6 +65,11 @@ func RechercheHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	usersearch := r.URL.Query().Get("usersearch")
+	independent := r.URL.Query().Get("independent")
+	alphabetical := r.URL.Query().Get("alphabetical")
+	minPopulation := r.URL.Query().Get("min_population")
+	maxPopulation := r.URL.Query().Get("max_population")
+
 	searchResults := fonction.SearchCountry(usersearch)
 	var message string
 
@@ -73,12 +78,26 @@ func RechercheHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		message = ""
 	}
+	if independent == "true" {
+		searchResults = fonction.FilterIndependent(searchResults)
+	}
+	if alphabetical == "true" {
+		searchResults = fonction.FilterAlphabetical(searchResults)
+	}
+	if minPopulation != "" || maxPopulation != "" {
+		minPop, _ := strconv.Atoi(minPopulation)
+		maxPop, _ := strconv.Atoi(maxPopulation)
+		searchResults = fonction.FilterByPopulation(searchResults, minPop, maxPop)
+	}
+
 	data := struct {
-		Message string
-		Results []fonction.SearchResults
+		Usersearch string
+		Message    string
+		Results    []fonction.SearchResults
 	}{
-		Message: message,
-		Results: searchResults,
+		Usersearch: usersearch,
+		Message:    message,
+		Results:    searchResults,
 	}
 
 	InitTemplate.Temp.ExecuteTemplate(w, "search", data)
