@@ -251,3 +251,42 @@ func SearchIndex() []SearchResults {
 	return searchResults
 
 }
+
+// Fonction pour filtrer par indépendance
+func FilterIndependent(results []SearchResults) []SearchResults {
+	var filteredResults []SearchResults
+	for _, result := range results {
+		if result.Independent {
+			filteredResults = append(filteredResults, result)
+		}
+	}
+	return filteredResults
+}
+
+// Fonction pour filtrer par population
+func FilterByPopulation(results []SearchResults, minPopulation, maxPopulation int) []SearchResults {
+	var filteredResults []SearchResults
+	for _, result := range results {
+		if result.Pop >= minPopulation && result.Pop <= maxPopulation {
+			filteredResults = append(filteredResults, result)
+		}
+	}
+	return filteredResults
+}
+
+// Fonction pour filtrer par ordre alphabétique
+func FilterAlphabetical(results []SearchResults) []SearchResults {
+	var filteredResults []SearchResults
+
+	for i := 0; i < len(results); i++ {
+		for j := i + 1; j < len(results); j++ {
+			if results[i].Name > results[j].Name {
+				results[i], results[j] = results[j], results[i]
+			}
+		}
+	}
+
+	filteredResults = append(filteredResults, results...)
+
+	return filteredResults
+}

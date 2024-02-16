@@ -26,11 +26,18 @@
                 <a href="/favorite">  <div class="button_slide-header slide_right"> FAV   </div> </a>
             </div>
     </header>
+        <section class="filtre">
+            <form action="/category" method="GET">
+                <input type="hidden" name="category" value="{{.Category}}">
+                <label><input type="checkbox" name="independent" value="true"> Indépendant</label>
+                <label><input type="checkbox" name="alphabetical" value="true"> A-Z</label>
+                <label> <input placeholder="min" type="number" name="min_population" value=""></label>
+                <label><input placeholder="max" type="number" name="max_population" value=""></label>
+                <button class="button_slide-filter slide_right"type="submit">Filtrer</button>
+            </form>
+    </section>
 
         <section class="container-global">
-            <a href="/category?category={{.Category}}&independent=true"> Indépendant </a>
-            <a href="/category?category={{.Category}}&independent=true"> Orde Alpha</a>
-            <a href="/category?category={{.Category}}&independent=true"> Indépendant </a>
         
             {{range .Results}}
             <div class="container-country">

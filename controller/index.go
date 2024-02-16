@@ -4,6 +4,7 @@ import (
 	"Groupie/fonction"
 	InitTemplate "Groupie/templates"
 	"net/http"
+	"strconv"
 )
 
 // Handler pour afficher l'index du site
@@ -25,13 +26,27 @@ func CateHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	Category := r.URL.Query().Get("category")
+	independent := r.URL.Query().Get("independent")
+	alphabetical := r.URL.Query().Get("alphabetical")
+	minPopulation := r.URL.Query().Get("min_population")
+	maxPopulation := r.URL.Query().Get("max_population")
 
 	searchcategory := fonction.GetContinent(Category)
 	if len(searchcategory) == 0 {
 		http.Error(w, "Not Found: No results found", http.StatusNotFound)
 		return
 	}
-
+	if independent == "true" {
+		searchcategory = fonction.FilterIndependent(searchcategory)
+	}
+	if alphabetical == "true" {
+		searchcategory = fonction.FilterAlphabetical(searchcategory)
+	}
+	if minPopulation != "" || maxPopulation != "" {
+		minPop, _ := strconv.Atoi(minPopulation)
+		maxPop, _ := strconv.Atoi(maxPopulation)
+		searchcategory = fonction.FilterByPopulation(searchcategory, minPop, maxPop)
+	}
 	data := struct {
 		Category string
 		Results  []fonction.SearchResults // Assurez-vous de définir le type correct ici
@@ -158,8 +173,4 @@ func FilterHandlerFromCategory(w http.ResponseWriter, r *http.Request) {
 			filteredResults = append(filteredResults, country)
 		}
 	}
-}
-
-func FilterHandlerFromSearch(w http.ResponseWriter, r *http.Request) {
-
 }

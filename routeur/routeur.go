@@ -13,11 +13,7 @@ func Serveur() {
 	http.HandleFunc("/treatment/index", controller.IndexTreatmentHandler)
 	http.HandleFunc("/search", controller.RechercheHandler) //Query => /search?usersearch=""
 	http.HandleFunc("/category", controller.CateHandler)
-	http.HandleFunc("/categoryfilter", controller.FilterHandlerFromCategory)
-	http.HandleFunc("/searchfilter", controller.FilterHandlerFromSearch)
-	http.HandleFunc("/details", controller.DetailsHandler)       //Query => /details?country=""
-	http.HandleFunc("/createuser", controller.CreateUserHandler) // use query params: ?<input>=error (input: "pass" or "user")
-	http.HandleFunc("/createuser/treatment", controller.CreateUserTreatmentHandler)
+	http.HandleFunc("/details", controller.DetailsHandler) //Query => /details?country=""
 	http.HandleFunc("/favorite/treatment", controller.AddFavoriteTreatmentHandler)
 	http.HandleFunc("/favorite", controller.FavoriteHandler)
 	http.HandleFunc("/delete/treatment", controller.DeleteHandler)
