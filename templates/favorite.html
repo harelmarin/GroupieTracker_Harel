@@ -23,17 +23,21 @@
             <form action="/search" method="GET">
             <input type="text" name="usersearch" autocomplete="off" placeholder="Search . . . ">
             </form>
-            <a href="/favorite"> FAV </a>
+            <a href="/favorite">  <div class="button_slide-header slide_right"> FAV   </div> </a>
         </div>
 </header>
 
     <section class="container-global">
+        {{if eq .Message ""}}
         {{range .Favorite}}
         <div class="container-country">
             <a href="/details?country={{.Name}}"> <img src="{{.Flag}}" alt="Flag"> 
         <h2>{{.Name}}</h2> </a>
         </div>
         {{end}}
+        {{else}}
+<p class="message"> {{.Message}} </p>
+    {{end}}
     </section>
     
 

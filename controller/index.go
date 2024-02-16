@@ -8,7 +8,8 @@ import (
 
 // Handler pour afficher l'index du site
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
-	InitTemplate.Temp.ExecuteTemplate(w, "index", fonction.DecodeData)
+	searchlangue := fonction.SearchIndex()
+	InitTemplate.Temp.ExecuteTemplate(w, "index", searchlangue)
 }
 
 func IndexTreatmentHandler(w http.ResponseWriter, r *http.Request) {
@@ -31,7 +32,15 @@ func CateHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	InitTemplate.Temp.ExecuteTemplate(w, "category", searchcategory)
+	data := struct {
+		Category string
+		Results  []fonction.SearchResults // Assurez-vous de définir le type correct ici
+	}{
+		Category: Category,
+		Results:  searchcategory,
+	}
+
+	InitTemplate.Temp.ExecuteTemplate(w, "category", data)
 }
 
 // Handler pour afficher les résultats de la recherche utilisateur de la searchBar sur une page.
@@ -42,12 +51,22 @@ func RechercheHandler(w http.ResponseWriter, r *http.Request) {
 
 	usersearch := r.URL.Query().Get("usersearch")
 	searchResults := fonction.SearchCountry(usersearch)
+	var message string
+
 	if len(searchResults) == 0 {
-		http.Error(w, "Not Found: No results found", http.StatusNotFound)
-		return
+		message = "Aucun résultat pour votre recherche"
+	} else {
+		message = ""
+	}
+	data := struct {
+		Message string
+		Results []fonction.SearchResults
+	}{
+		Message: message,
+		Results: searchResults,
 	}
 
-	InitTemplate.Temp.ExecuteTemplate(w, "search", searchResults)
+	InitTemplate.Temp.ExecuteTemplate(w, "search", data)
 }
 
 // Handler pour afficher le détail du pays selectionné
@@ -99,11 +118,19 @@ func FavoriteHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Erreur lors de la récupération des favoris", http.StatusInternalServerError)
 		return
 	}
+	var message string
+	if len(favs) == 0 {
+		message = "Vous n'avez aucun favoris"
+	} else {
+		message = ""
+	}
 
 	data := struct {
 		Favorite []fonction.FavoriteInfo
+		Message  string
 	}{
 		Favorite: favs,
+		Message:  message,
 	}
 	InitTemplate.Temp.ExecuteTemplate(w, "favorite", data)
 }
@@ -120,7 +147,7 @@ func DeleteHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // Handler pour filtrer les résultats affichés
-func FilterHandler(w http.ResponseWriter, r *http.Request) {
+func FilterHandlerFromCategory(w http.ResponseWriter, r *http.Request) {
 	var filteredResults []fonction.SearchResults
 
 	// Filtrer les résultats en fonction de la population
@@ -131,4 +158,8 @@ func FilterHandler(w http.ResponseWriter, r *http.Request) {
 			filteredResults = append(filteredResults, country)
 		}
 	}
+}
+
+func FilterHandlerFromSearch(w http.ResponseWriter, r *http.Request) {
+
 }

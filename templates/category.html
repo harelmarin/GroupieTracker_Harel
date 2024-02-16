@@ -1,49 +1,52 @@
-{{define "category"}}
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content ="IE-edge">
-    <meta name="viewport" content="width=devicewidth, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/base.css" />
-    <link rel="stylesheet" href="/static/css/style.css" />
-    <title>CATEGORY</title>
-</head>
-<body>
-<header>
+    {{define "category"}}
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content ="IE-edge">
+        <meta name="viewport" content="width=devicewidth, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/css/base.css" />
+        <link rel="stylesheet" href="/static/css/style.css" />
+        <title>CATEGORY</title>
+    </head>
+    <body>
+    <header>
 
-    <nav>
-        <a href="/category?category=africa"> Afrique </a>
-        <a href="/category?category=america"> Amérique </a>
-        <a href="/category?category=asia"> Asie </a>
-        <a href="/category?category=europe"> Europe </a>
-        <a href="/category?category=oceania"> Océanie </a>
-        </nav>
-        <div class="header-search-login">
-            <form action="/search" method="GET">
-            <input type="text" name="usersearch" autocomplete="off" placeholder="Search . . . ">
-            </form>
-            <a href="/favorite"> FAV </a>
-        </div>
-</header>
+        <nav>
+            <a href="/category?category=africa"> Afrique </a>
+            <a href="/category?category=america"> Amérique </a>
+            <a href="/category?category=asia"> Asie </a>
+            <a href="/category?category=europe"> Europe </a>
+            <a href="/category?category=oceania"> Océanie </a>
+            </nav>
+            <div class="header-search-login">
+                <form action="/search" method="GET">
+                <input type="text" name="usersearch" autocomplete="off" placeholder="Search . . . ">
+                </form>
+                <a href="/favorite">  <div class="button_slide-header slide_right"> FAV   </div> </a>
+            </div>
+    </header>
 
-    <section class="container-global">
-        <a href="/category?category={{.Reg}}&independent=true"> </a>
-        {{range .}}
-        <div class="container-country">
-            <a href="/details?country={{.Name}}"> <img src="{{.Flag}}" alt="Flag"> 
-        <h2>{{.Name}}</h2> </a>
-        </div>
-        {{end}}
-    </section>
-    
+        <section class="container-global">
+            <a href="/category?category={{.Category}}&independent=true"> Indépendant </a>
+            <a href="/category?category={{.Category}}&independent=true"> Orde Alpha</a>
+            <a href="/category?category={{.Category}}&independent=true"> Indépendant </a>
+        
+            {{range .Results}}
+            <div class="container-country">
+                <a href="/details?country={{.Name}}"> <img src="{{.Flag}}" alt="Flag"> 
+            <h2>{{.Name}}</h2> </a>
+            </div>
+            {{end}}
+        </section>
+        
 
 
-<footer>
-zffz
-</footer>
-</body>
-{{end}}
+    <footer>
+    zffz
+    </footer>
+    </body>
+    {{end}}
 
 
 

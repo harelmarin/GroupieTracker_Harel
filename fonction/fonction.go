@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"sort"
 	"strings"
 	"time"
 )
@@ -171,10 +172,82 @@ func formatNumber(Number float64) string {
 	return formattedIntPart
 }
 
-func CalculateTotalPages(NbResult int) int {
-	totalPages := NbResult / 10
-	if NbResult%10 != 0 {
-		totalPages++
+type FilterOptions struct {
+	Independent  bool
+	Alphabetical bool
+}
+
+// Fonction qui permet de filter mes pays en fonction des options cliqués
+func FilterCountries(countries []SearchResults, options FilterOptions) []SearchResults {
+
+	// Filtre par indépendance
+	if options.Independent {
+		var filteredCountries []SearchResults
+		for _, country := range countries {
+			if country.Independent {
+				filteredCountries = append(filteredCountries, country)
+			}
+		}
+		countries = filteredCountries
 	}
-	return totalPages
+
+	// Filtrer par ordre alphabétique
+	if options.Alphabetical {
+		sort.Slice(countries, func(i, j int) bool {
+			return countries[i].Name < countries[j].Name
+		})
+	}
+
+	return countries
+}
+
+func SearchIndex() []SearchResults {
+
+	URLSearch := "https://restcountries.com/v3.1/lang/French"
+
+	//Init Client
+	httpClient := http.Client{
+		Timeout: time.Second * 2,
+	}
+
+	//Créer requête HTTP
+	req, errReq := http.NewRequest(http.MethodGet, URLSearch, nil)
+	if errReq != nil {
+		fmt.Println("Erreur avec la requête : ", errReq.Error())
+
+	}
+
+	//Exécution HTTP
+	res, errRes := httpClient.Do(req)
+	if errRes != nil {
+		fmt.Println("Erreur lors de la requête HTTP")
+	}
+	defer res.Body.Close()
+	//Lecture et Récup de la requête
+	body, errBody := io.ReadAll(res.Body)
+	if errBody != nil {
+		fmt.Println("Problème avec lecture du corps")
+	}
+
+	//Décodage des données
+	if err := json.Unmarshal(body, &DecodeData); err != nil {
+		fmt.Println("Erreur lors du décodage des données JSON (Nom problablement incorrect)")
+		fmt.Println("Réponse JSON reçue:", string(body))
+
+	}
+	var searchResults []SearchResults
+	for _, c := range DecodeData {
+		result := SearchResults{
+			Name:        c.Translations.Fra.Common,
+			Flag:        c.Flags.Png,
+			Area:        int(c.Area),
+			Pop:         int(c.Population),
+			Reg:         c.Region,
+			IsFavorite:  bool(IsCountryFavorite(c.Translations.Fra.Common)),
+			Independent: bool(c.Independent),
+		}
+		searchResults = append(searchResults, result)
+	}
+	return searchResults
+
 }
