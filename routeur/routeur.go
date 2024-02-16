@@ -17,6 +17,7 @@ func Serveur() {
 	http.HandleFunc("/favorite/treatment", controller.AddFavoriteTreatmentHandler)
 	http.HandleFunc("/favorite", controller.FavoriteHandler)
 	http.HandleFunc("/delete/treatment", controller.DeleteHandler)
+	http.HandleFunc("/about", controller.AboutHandler)
 
 	rootDoc, _ := os.Getwd()
 	fileserver := http.FileServer(http.Dir(rootDoc + "/asset"))

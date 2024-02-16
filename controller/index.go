@@ -32,10 +32,7 @@ func CateHandler(w http.ResponseWriter, r *http.Request) {
 	maxPopulation := r.URL.Query().Get("max_population")
 
 	searchcategory := fonction.GetContinent(Category)
-	if len(searchcategory) == 0 {
-		http.Error(w, "Not Found: No results found", http.StatusNotFound)
-		return
-	}
+
 	if independent == "true" {
 		searchcategory = fonction.FilterIndependent(searchcategory)
 	}
@@ -47,12 +44,20 @@ func CateHandler(w http.ResponseWriter, r *http.Request) {
 		maxPop, _ := strconv.Atoi(maxPopulation)
 		searchcategory = fonction.FilterByPopulation(searchcategory, minPop, maxPop)
 	}
+	var message string
+	if len(searchcategory) == 0 {
+		message = "Aucun résultat pour votre recherche"
+	} else {
+		message = ""
+	}
 	data := struct {
 		Category string
-		Results  []fonction.SearchResults // Assurez-vous de définir le type correct ici
+		Results  []fonction.SearchResults
+		Message  string
 	}{
 		Category: Category,
 		Results:  searchcategory,
+		Message:  message,
 	}
 
 	InitTemplate.Temp.ExecuteTemplate(w, "category", data)
@@ -73,11 +78,6 @@ func RechercheHandler(w http.ResponseWriter, r *http.Request) {
 	searchResults := fonction.SearchCountry(usersearch)
 	var message string
 
-	if len(searchResults) == 0 {
-		message = "Aucun résultat pour votre recherche"
-	} else {
-		message = ""
-	}
 	if independent == "true" {
 		searchResults = fonction.FilterIndependent(searchResults)
 	}
@@ -89,7 +89,11 @@ func RechercheHandler(w http.ResponseWriter, r *http.Request) {
 		maxPop, _ := strconv.Atoi(maxPopulation)
 		searchResults = fonction.FilterByPopulation(searchResults, minPop, maxPop)
 	}
-
+	if len(searchResults) == 0 {
+		message = "Aucun résultat pour votre recherche"
+	} else {
+		message = ""
+	}
 	data := struct {
 		Usersearch string
 		Message    string
@@ -113,14 +117,6 @@ func DetailsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	InitTemplate.Temp.ExecuteTemplate(w, "details", Country)
-}
-
-func CreateUserHandler(w http.ResponseWriter, r *http.Request) {
-	InitTemplate.Temp.ExecuteTemplate(w, "createuser", nil)
-}
-
-func CreateUserTreatmentHandler(w http.ResponseWriter, r *http.Request) {
-
 }
 
 // Treatment pour ajouter les favoris dans le fichier Json
@@ -192,4 +188,9 @@ func FilterHandlerFromCategory(w http.ResponseWriter, r *http.Request) {
 			filteredResults = append(filteredResults, country)
 		}
 	}
+}
+
+func AboutHandler(w http.ResponseWriter, r *http.Request) {
+
+	InitTemplate.Temp.ExecuteTemplate(w, "about", nil)
 }

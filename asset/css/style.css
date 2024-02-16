@@ -58,6 +58,13 @@ footer {
     border-top: 2px solid #fefefe;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
+}
+
+footer a {
+    text-decoration: none;
+    color: #fefefe;
+    margin-right: 5vh;
 }
 
 .container-global {
@@ -244,4 +251,11 @@ footer {
     -moz-transition: ease-out 0.4s;
     transition: ease-out 0.4s;
     text-align: center; 
+  }
+
+  .container-global .container-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #262626;
   }
