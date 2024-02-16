@@ -89,7 +89,6 @@ func SearchCountry(usersearch string) []SearchResults {
 		}
 	}
 	return searchResults
-
 }
 
 // requête pour récupérer les données des pays du continent choisi
@@ -263,7 +262,6 @@ func FilterIndependent(results []SearchResults) []SearchResults {
 	return filteredResults
 }
 
-// Fonction pour filtrer par population
 // Fonction pour filtrer par population
 func FilterByPopulation(results []SearchResults, minPopulation, maxPopulation int) []SearchResults {
 	var filteredResults []SearchResults

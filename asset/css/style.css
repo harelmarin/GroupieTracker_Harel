@@ -6,7 +6,7 @@
 
 header {
     width: auto;
-    height: 15vh;
+    height: 20vh;
     background-color: #050505;
     color: #fefefe;
     display: flex;
@@ -14,26 +14,57 @@ header {
     justify-content: space-between;
     padding-left: 20px;
     padding-right: 100px;
+    font-family: "Lalezar", system-ui;
+    border-bottom: 2px solid #fefefe;
 }
 
 header nav {
     display: flex;
     justify-content: space-around;
-    width: 50vh;
-    
+    width: 60vh;
+    margin-left: 10vh; 
 }
+
 header a {
     text-decoration: none;
     color: #fefefe;
 }
 
+
+.cate-a{
+    width: 8vh;
+    text-align: center;
+    text-decoration: none;
+    color: #fefefe;
+    border: #050505 1px solid;
+    border-radius: 10px;
+    background-color: #262626;
+    padding: 10px;
+    box-shadow: black;
+}
+
+.cate-a:hover{
+    transform: scale(1.05);
+    background-color: #D80286;
+}
+
 header input {
     background-color: #050505;
-    border: 1px solid #fefefe;
+    border: 2px solid #fefefe;
     border-radius: 10px;
     color: #fefefe;
     padding: 5px;
     font-weight: 900;
+}
+
+header input:hover {
+    transform: scale(1.05);
+    border: 2px solid #D80286;
+}
+
+header input:focus {
+    transform: scale(1.05);
+    border: 2px solid #D80286;
 }
 
 .header-search-login {
@@ -209,8 +240,7 @@ footer a {
   
   .filtre {
     display: flex;
-
-
+    justify-content: center;
   }
   .filtre form {
     width: 120vh;
@@ -258,4 +288,10 @@ footer a {
     justify-content: center;
     align-items: center;
     background-color: #262626;
+  }
+
+
+  input[type="checkbox"] { 
+    background-color: #050505;
+    border: 2px solid #fefefe;
   }

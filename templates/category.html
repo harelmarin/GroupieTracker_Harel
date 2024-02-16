@@ -7,17 +7,20 @@
         <meta name="viewport" content="width=devicewidth, initial-scale=1.0">
         <link rel="stylesheet" href="/static/css/base.css" />
         <link rel="stylesheet" href="/static/css/style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">    
         <title>CATEGORY</title>
     </head>
     <body>
     <header>
 
         <nav>
-            <a href="/category?category=africa"> Afrique </a>
-            <a href="/category?category=america"> Amérique </a>
-            <a href="/category?category=asia"> Asie </a>
-            <a href="/category?category=europe"> Europe </a>
-            <a href="/category?category=oceania"> Océanie </a>
+            <a class="cate-a"href="/category?category=africa"> Afrique </a>
+            <a class="cate-a"href="/category?category=america"> Amérique </a>
+            <a class="cate-a"href="/category?category=asia"> Asie </a>
+            <a class="cate-a"href="/category?category=europe"> Europe </a>
+            <a class="cate-a"href="/category?category=oceania"> Océanie </a>
             </nav>
             <div class="header-search-login">
                 <form action="/search" method="GET">
@@ -31,8 +34,8 @@
                 <input type="hidden" name="category" value="{{.Category}}">
                 <label><input type="checkbox" name="independent" value="true"> Indépendant</label>
                 <label><input type="checkbox" name="alphabetical" value="true"> A-Z</label>
-                <label><input placeholder="max" type="number" name="max_population" value=""></label>
-                <label> <input placeholder="min" type="number" name="min_population" value=""></label>
+                <label><input placeholder="max" type="number" name="max_population" value="" inputmode="numeric"></label>
+                <label> <input placeholder="min" type="number" name="min_population" value="" inputmode="numeric"></label>
            
                 <button class="button_slide-filter slide_right"type="submit">Filtrer</button>
             </form>
