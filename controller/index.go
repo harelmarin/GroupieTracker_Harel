@@ -39,11 +39,13 @@ func CateHandler(w http.ResponseWriter, r *http.Request) {
 	if alphabetical == "true" {
 		searchcategory = fonction.FilterAlphabetical(searchcategory)
 	}
+
 	if minPopulation != "" || maxPopulation != "" {
 		minPop, _ := strconv.Atoi(minPopulation)
 		maxPop, _ := strconv.Atoi(maxPopulation)
 		searchcategory = fonction.FilterByPopulation(searchcategory, minPop, maxPop)
 	}
+
 	var message string
 	if len(searchcategory) == 0 {
 		message = "Aucun résultat pour votre recherche"
@@ -89,6 +91,7 @@ func RechercheHandler(w http.ResponseWriter, r *http.Request) {
 		maxPop, _ := strconv.Atoi(maxPopulation)
 		searchResults = fonction.FilterByPopulation(searchResults, minPop, maxPop)
 	}
+
 	if len(searchResults) == 0 {
 		message = "Aucun résultat pour votre recherche"
 	} else {

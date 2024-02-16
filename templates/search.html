@@ -31,8 +31,9 @@
         <input type="hidden" name="usersearch" value="{{.Usersearch}}">
         <label><input type="checkbox" name="independent" value="true"> Indépendant</label>
         <label><input type="checkbox" name="alphabetical" value="true"> A-Z</label>
-        <label><input placeholder="max" type="number" name="max_population" value=""></label>
         <label> <input placeholder="min" type="number" name="min_population" value=""></label>
+        <label><input placeholder="max" type="number" name="max_population" value=""></label>
+       
         
         <button class="button_slide-filter slide_right"type="submit">Filtrer</button>
     </form>
@@ -49,6 +50,13 @@
 {{else}}
 <p class="message"> {{.Message}} </p>
     {{end}}
+    {{if .PreviousPage}}
+    <a href="/search?{{.CurrentQuery}}&page={{.PreviousPage}}&">Page précédente</a>
+{{end}}
+
+{{if .NextPage}}
+    <a href="/search?{{.CurrentQuery}}&page={{.NextPage}}">Page suivante</a>
+{{end}}
 
     
 </section>

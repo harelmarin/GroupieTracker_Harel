@@ -264,10 +264,17 @@ func FilterIndependent(results []SearchResults) []SearchResults {
 }
 
 // Fonction pour filtrer par population
+// Fonction pour filtrer par population
 func FilterByPopulation(results []SearchResults, minPopulation, maxPopulation int) []SearchResults {
 	var filteredResults []SearchResults
 	for _, result := range results {
-		if result.Pop >= minPopulation && result.Pop <= maxPopulation {
+		// Si le min n'est pas spécifié ou si la population est supérieure ou égale au min spécifié
+		minPass := minPopulation == 0 || result.Pop >= minPopulation
+		// Si le max n'est pas spécifié ou si la population est inférieure ou égale au max spécifié
+		maxPass := maxPopulation == 0 || result.Pop <= maxPopulation
+
+		// Ajoutez le résultat si les conditions min et max sont remplies
+		if minPass && maxPass {
 			filteredResults = append(filteredResults, result)
 		}
 	}
@@ -289,4 +296,19 @@ func FilterAlphabetical(results []SearchResults) []SearchResults {
 	filteredResults = append(filteredResults, results...)
 
 	return filteredResults
+}
+
+func GetPageResults(results []SearchResults, page int) []SearchResults {
+	startIndex := (page - 1) * 10
+	endIndex := startIndex + 10
+
+	if startIndex >= len(results) {
+		return []SearchResults{}
+	}
+
+	if endIndex > len(results) {
+		endIndex = len(results)
+	}
+
+	return results[startIndex:endIndex]
 }
