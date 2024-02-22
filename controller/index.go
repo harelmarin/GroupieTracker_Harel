@@ -97,6 +97,7 @@ func RechercheHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		message = ""
 	}
+
 	data := struct {
 		Usersearch string
 		Message    string
@@ -177,20 +178,6 @@ func DeleteHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	http.Redirect(w, r, "/favorite", http.StatusSeeOther)
-}
-
-// Handler pour filtrer les résultats affichés
-func FilterHandlerFromCategory(w http.ResponseWriter, r *http.Request) {
-	var filteredResults []fonction.SearchResults
-
-	// Filtrer les résultats en fonction de la population
-	countryname := r.URL.Query().Get("country")
-	Country := fonction.SearchCountry(countryname)
-	for _, country := range Country {
-		if country.Independent {
-			filteredResults = append(filteredResults, country)
-		}
-	}
 }
 
 func AboutHandler(w http.ResponseWriter, r *http.Request) {

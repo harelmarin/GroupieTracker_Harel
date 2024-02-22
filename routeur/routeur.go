@@ -11,12 +11,12 @@ import (
 func Serveur() {
 	http.HandleFunc("/index", controller.IndexHandler)
 	http.HandleFunc("/treatment/index", controller.IndexTreatmentHandler)
-	http.HandleFunc("/search", controller.RechercheHandler) //Query => /search?usersearch=""
-	http.HandleFunc("/category", controller.CateHandler)
-	http.HandleFunc("/details", controller.DetailsHandler) //Query => /details?country=""
-	http.HandleFunc("/favorite/treatment", controller.AddFavoriteTreatmentHandler)
+	http.HandleFunc("/search", controller.RechercheHandler)                        //Query => /search?usersearch=""
+	http.HandleFunc("/category", controller.CateHandler)                           //Query => /category?category=""
+	http.HandleFunc("/details", controller.DetailsHandler)                         //Query => /details?country=""
+	http.HandleFunc("/favorite/treatment", controller.AddFavoriteTreatmentHandler) //Query => /favorite/treatment?country=""
 	http.HandleFunc("/favorite", controller.FavoriteHandler)
-	http.HandleFunc("/delete/treatment", controller.DeleteHandler)
+	http.HandleFunc("/delete/treatment", controller.DeleteHandler) //Query => /delete/treatment?country=""
 	http.HandleFunc("/about", controller.AboutHandler)
 
 	rootDoc, _ := os.Getwd()

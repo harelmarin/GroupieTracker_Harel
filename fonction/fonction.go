@@ -234,6 +234,7 @@ func SearchIndex() []SearchResults {
 		fmt.Println("Réponse JSON reçue:", string(body))
 
 	}
+
 	var searchResults []SearchResults
 	for _, c := range DecodeData {
 		result := SearchResults{

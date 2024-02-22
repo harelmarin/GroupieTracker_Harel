@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">    
-    <title>SEARCH</title>
+    <title>DETAILS</title>
 </head>
 <body>
 <header>
@@ -42,10 +42,8 @@
             <h3>Aire : {{.Area}} km² </h3><br>
             <h3>Population : {{.Pop}} Habitants </h3><br>
             {{if .IsFavorite}}
-          
             <a href="/delete/treatment?country={{.Name}}&reg={{.Reg}}&area={{.Area}}&pop={{.Pop}}&flag={{.Flag}}"> <div class="button_slide slide_right"> Supprimer </div></a>
             {{else}}
-        
            <a href="/favorite/treatment?country={{.Name}}&reg={{.Reg}}&area={{.Area}}&pop={{.Pop}}&flag={{.Flag}}"> <div class="button_slide slide_right"> Favoris </div></a>
             {{end}}
         </div>

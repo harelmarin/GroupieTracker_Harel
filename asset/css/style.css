@@ -15,7 +15,7 @@ header {
     padding-left: 20px;
     padding-right: 100px;
     font-family: "Lalezar", system-ui;
-    border-bottom: 2px solid #fefefe;
+    box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.90);
 }
 
 header nav {
@@ -86,7 +86,7 @@ footer {
     height: 10vh;
     background-color: #050505;
     color: #fefefe;
-    border-top: 2px solid #fefefe;
+    box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.90);
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -154,12 +154,14 @@ footer a {
     background-color: #262626;
     border-radius: 10px;
     padding: 5vh;
+    box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
 }
 
 .container-details img {
     width: 45vh;
     height: 32vh;
     border-radius: 10px;
+   
 }
 
 .details {
@@ -241,17 +243,18 @@ footer a {
   .filtre {
     display: flex;
     justify-content: center;
+    margin-bottom: 5vh;
   }
   .filtre form {
     width: 120vh;
     margin-top: 5vh;
     margin-left: 5vh;
     display: flex;
-    flex-direction: row-reverse;
     justify-content: space-evenly;
 
   }
-.filtre input {
+.filtre input[type="input"],
+.filtre input[type="checkbox"] {
     width: 10vh;
     background-color: #050505;
     border: 1px solid #fefefe;
@@ -260,10 +263,14 @@ footer a {
     padding: 5px;
     font-weight: 900;
 }
+.filtre input:hover {
+    transform: scale(1.05);
+}
   .filtre a {
     text-decoration: none;
   }
 
+ 
   .button_slide-filter {
     width: 20vh;
     background-color: #050505;
@@ -283,15 +290,28 @@ footer a {
     text-align: center; 
   }
 
-  .container-global .container-message {
+ input[type="number"]::-webkit-inner-spin-button,
+ input[type="number"]::-webkit-outer-spin-button {
+     -webkit-appearance: none; 
+     margin: 0; /
+ }
+ input[type="number"] {
+     -moz-appearance: textfield;
+ }
+
+ .container-message {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #262626;
-  }
+    padding: 10vh;
+ }
 
+ .container-message p {
+    color: #fefefe;
+    font-weight: 500;
+    font-size: 30px;
+ }
 
-  input[type="checkbox"] { 
-    background-color: #050505;
-    border: 2px solid #fefefe;
-  }
+ input[type="checkbox"] {
+    opacity: 0.50;
+ }

@@ -34,8 +34,9 @@
                 <input type="hidden" name="category" value="{{.Category}}">
                 <label><input type="checkbox" name="independent" value="true"> Indépendant</label>
                 <label><input type="checkbox" name="alphabetical" value="true"> A-Z</label>
-                <label><input placeholder="max" type="number" name="max_population" value="" inputmode="numeric"></label>
-                <label> <input placeholder="min" type="number" name="min_population" value="" inputmode="numeric"></label>
+                <label> <input placeholder="min" type="input" name="min_population" value="" inputmode="numeric" autocomplete="off"></label>
+                <label><input placeholder="max" type="input" name="max_population" value="" inputmode="numeric" autocomplete="off"></label>
+              
            
                 <button class="button_slide-filter slide_right"type="submit">Filtrer</button>
             </form>
@@ -50,8 +51,10 @@
             </div>
             {{end}}
             {{else}}
-            <p class="message"> {{.Message}} </p>
+            <div class="container-message">
+            <p>{{.Message}} </p>
                 {{end}}
+            </div>
         </section>
         
 
