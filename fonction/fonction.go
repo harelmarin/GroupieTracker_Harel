@@ -88,6 +88,7 @@ func SearchCountry(usersearch string) []SearchResults {
 			searchResults = append(searchResults, result)
 		}
 	}
+
 	return searchResults
 }
 

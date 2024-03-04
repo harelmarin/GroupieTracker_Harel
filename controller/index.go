@@ -92,20 +92,50 @@ func RechercheHandler(w http.ResponseWriter, r *http.Request) {
 		searchResults = fonction.FilterByPopulation(searchResults, minPop, maxPop)
 	}
 
+	pageNumber := 1
+	pageNumberStr := r.URL.Query().Get("page")
+	if pageNumberStr != "" {
+		pageNumber, _ = strconv.Atoi(pageNumberStr)
+		if pageNumber < 1 {
+			pageNumber = 1
+		}
+	}
+
+	totalResults := len(searchResults)
+	nbPages := totalResults / 10
+	if totalResults%10 != 0 {
+		nbPages++
+	}
+	startIndex := (pageNumber - 1) * 10
+	endIndex := startIndex + 10
+	if endIndex > totalResults {
+		endIndex = totalResults
+	}
+	resultsPage := searchResults[startIndex:endIndex]
+
 	if len(searchResults) == 0 {
 		message = "Aucun résultat pour votre recherche"
 	} else {
 		message = ""
 	}
-
+	Next := pageNumber + 1
+	Prev := pageNumber - 1
 	data := struct {
-		Usersearch string
-		Message    string
-		Results    []fonction.SearchResults
+		Usersearch  string
+		Message     string
+		Results     []fonction.SearchResults
+		CurrentPage int
+		TotalPages  int
+		Next        int
+		Prev        int
 	}{
-		Usersearch: usersearch,
-		Message:    message,
-		Results:    searchResults,
+		Usersearch:  usersearch,
+		Message:     message,
+		Results:     resultsPage,
+		CurrentPage: pageNumber,
+		TotalPages:  nbPages,
+		Next:        Next,
+		Prev:        Prev,
 	}
 
 	InitTemplate.Temp.ExecuteTemplate(w, "search", data)
