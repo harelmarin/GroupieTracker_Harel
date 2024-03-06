@@ -47,7 +47,7 @@
     {{if eq .Message ""}}
     {{range .Results}}
     <div class="container-country">
-        <a href="/details?country={{.Name}}"> <img src="{{.Flag}}" alt="Flag"> 
+        <a href="/details?country={{.Name}}"> <img src="{{.Flag}}" alt="Flag">  </a>
     <h2>{{.Name}}</h2>
     </div>
     {{end}}
@@ -56,20 +56,22 @@
 <p>{{.Message}} </p>
     {{end}}
 </div>
-
-{{if eq .TotalPages 1}}
 <div class="pagination"> 
-    inzjbzbjzfjb
+{{if eq .TotalPages 1}}
 
+    inzjbzbjzfjb
+   
 {{else}}
-    {{if gt .TotalPages 1}}
-    <a href="/search?usersearch={{.Usersearch}}&page={{.Next}}">Page suivante</a>
-    {{end}}
-        {{if gt .CurrentPage 1}}
-    <a href="/search?usersearch={{.Usersearch}}&page={{.Prev}}">Page précédente</a>
+    {{if gt .CurrentPage 1}}
+    <a class="button_slide_pagination " href="/search?usersearch={{.Usersearch}}&page={{.Prev}}">Page précédente</a>
    {{end}}
-</div>
+    {{if ne .TotalPages .CurrentPage}}
+    <a class="button_slide_pagination" href="/search?usersearch={{.Usersearch}}&page={{.Next}}" >Page suivante</a>
+    {{end}}
+    
+
 {{end}}
+</div>
 
     
 </section>

@@ -46,20 +46,53 @@ func CateHandler(w http.ResponseWriter, r *http.Request) {
 		searchcategory = fonction.FilterByPopulation(searchcategory, minPop, maxPop)
 	}
 
+	pageNumber := 1
+	pageNumberStr := r.URL.Query().Get("page")
+	if pageNumberStr != "" {
+		pageNumber, _ = strconv.Atoi(pageNumberStr)
+		if pageNumber < 1 {
+			pageNumber = 1
+		}
+	}
+
+	totalResults := len(searchcategory)
+	nbPages := totalResults / 10
+	if totalResults%10 != 0 {
+		nbPages++
+	}
+	startIndex := (pageNumber - 1) * 10
+	endIndex := startIndex + 10
+	if endIndex > totalResults {
+		endIndex = totalResults
+	}
+	resultsPage := searchcategory[startIndex:endIndex]
+
 	var message string
 	if len(searchcategory) == 0 {
 		message = "Aucun résultat pour votre recherche"
 	} else {
 		message = ""
 	}
+
+	Next := pageNumber + 1
+	Prev := pageNumber - 1
+
 	data := struct {
-		Category string
-		Results  []fonction.SearchResults
-		Message  string
+		Category    string
+		Results     []fonction.SearchResults
+		Message     string
+		CurrentPage int
+		TotalPages  int
+		Next        int
+		Prev        int
 	}{
-		Category: Category,
-		Results:  searchcategory,
-		Message:  message,
+		Category:    Category,
+		Results:     resultsPage,
+		Message:     message,
+		CurrentPage: pageNumber,
+		TotalPages:  nbPages,
+		Next:        Next,
+		Prev:        Prev,
 	}
 
 	InitTemplate.Temp.ExecuteTemplate(w, "category", data)

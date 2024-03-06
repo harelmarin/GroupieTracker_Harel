@@ -16,7 +16,7 @@
     <header>
 
         <nav>
-            <a class="cate-a"href="/category?category=africa"> Afrique </a>
+            <a class="cate-a"href="/category?category=africa&page=1"> Afrique </a>
             <a class="cate-a"href="/category?category=america"> Amérique </a>
             <a class="cate-a"href="/category?category=asia"> Asie </a>
             <a class="cate-a"href="/category?category=europe"> Europe </a>
@@ -46,7 +46,7 @@
             {{if eq .Message ""}}
             {{range .Results}}
             <div class="container-country">
-                <a href="/details?country={{.Name}}"> <img src="{{.Flag}}" alt="Flag"> 
+                <a href="/details?country={{.Name}}"> <img src="{{.Flag}}" alt="Flag"> </a>
             <h2>{{.Name}}</h2> </a>
             </div>
             {{end}}
@@ -55,10 +55,26 @@
             <p>{{.Message}} </p>
                 {{end}}
             </div>
-        </section>
+      
+        <div class="pagination"> 
+            {{if eq .TotalPages 1}}
+            
+                inzjbzbjzfjb
+               
+            {{else}}
+                {{if gt .CurrentPage 1}}
+                <a class="button_slide_pagination " href="/category?category={{.Category}}&page={{.Prev}}">Page précédente</a>
+               {{end}}
+                {{if ne .TotalPages .CurrentPage}}
+                <a class="button_slide_pagination" href="/category?category={{.Category}}&page={{.Next}}" >Page suivante</a>
+                {{end}}
+                
+            
+            {{end}}
+            </div>
         
 
-
+        </section>
     <footer>
     <a href="/about"> About </a>
     </footer>
