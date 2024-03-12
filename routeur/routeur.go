@@ -8,6 +8,7 @@ import (
 	"time"
 )
 
+// Gestionnaire des routes
 func Serveur() {
 	http.HandleFunc("/index", controller.IndexHandler)
 	http.HandleFunc("/treatment/index", controller.IndexTreatmentHandler)
@@ -18,14 +19,21 @@ func Serveur() {
 	http.HandleFunc("/favorite", controller.FavoriteHandler)
 	http.HandleFunc("/delete/treatment", controller.DeleteHandler) //Query => /delete/treatment?country=""
 	http.HandleFunc("/about", controller.AboutHandler)
+	http.HandleFunc("/error", controller.ErrorHandler)
 
 	rootDoc, _ := os.Getwd()
 	fileserver := http.FileServer(http.Dir(rootDoc + "/asset"))
 	http.Handle("/static/", http.StripPrefix("/static/", fileserver))
 
+	// Gestionnaire pour les routes non trouvées (404)
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/error", http.StatusNotFound)
+	})
+	// Lance le serveur
 	runServer()
 }
 
+// Fonction qui permet de lancer le serveur
 func runServer() {
 	port := "localhost:8080"
 	url := "http://" + port + "/index"

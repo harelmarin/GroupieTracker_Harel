@@ -239,11 +239,11 @@ footer a {
     font-weight: 900;
   }
 
-  
   .filtre {
     display: flex;
     justify-content: center;
     margin-bottom: 5vh;
+
   }
   .filtre form {
     width: 120vh;
@@ -251,8 +251,9 @@ footer a {
     margin-left: 5vh;
     display: flex;
     justify-content: space-evenly;
-
+    align-items: center;
   }
+
 .filtre input[type="input"],
 .filtre input[type="checkbox"] {
     width: 10vh;
@@ -262,10 +263,12 @@ footer a {
     color: #fefefe;
     padding: 5px;
     font-weight: 900;
+    cursor: pointer;
 }
 .filtre input:hover {
     transform: scale(1.05);
 }
+
   .filtre a {
     text-decoration: none;
   }
@@ -292,7 +295,7 @@ footer a {
  input[type="number"]::-webkit-inner-spin-button,
  input[type="number"]::-webkit-outer-spin-button {
      -webkit-appearance: none; 
-     margin: 0; /
+     margin: 0;
  }
  input[type="number"] {
      -moz-appearance: textfield;
@@ -313,6 +316,7 @@ footer a {
 
  input[type="checkbox"] {
     opacity: 0.50;
+   
  }
 
  .pagination {
@@ -337,7 +341,7 @@ footer a {
     padding: 9px 18px;
     display: inline-block;
     font-family: "Lucida Console", Monaco, monospace;
-    font-size: 10px;
+    font-size: 13px;
     letter-spacing: 1px;
     cursor: pointer;
     box-shadow: inset 0 0 0 0 #D80286;
@@ -350,3 +354,53 @@ footer a {
  .button_slide_pagination:hover {
     box-shadow: inset 400px 0 0 0 #D80286;
   }
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+}
+
+.container-global-cate {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-bottom: 5vh;
+    padding-top: 5vh;
+}
+
+.container-global-search {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-bottom: 12vh;
+    padding-top: 5vh;
+}
+
+.container-global-fav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-bottom: 12vh;
+    padding-top: 5vh;
+}
+
+.container-error {
+    display: flex;
+    justify-content: center;
+    padding-top: 10vh
+}
+
+.container-error h1 {
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.container-about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10vh;
+}

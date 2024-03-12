@@ -1,4 +1,4 @@
-{{define "favorite"}}
+{{define "error"}}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">    
-    <title>FAV</title>
+    <title>ABOUT</title>
 </head>
 <body>
 <header>
@@ -29,29 +29,16 @@
             <a href="/favorite">  <div class="button_slide-header slide_right"> FAV   </div> </a>
         </div>
 </header>
-
-    <section class="container-global-fav">
-        {{if eq .Message ""}}
-        {{range .Favorite}}
-        <div class="container-country">
-            <a href="/details?country={{.Name}}"> <img src="{{.Flag}}" alt="Flag"> 
-        <h2>{{.Name}}</h2> </a>
-        </div>
-        {{end}}
-        {{else}}
-        <div class="container-message">
-<p class="message"> {{.Message}} </p>
-    {{end}}
-</div>
-    </section>
-    
+<section class="container-error">
+<h1> PAGE INTROUVABLE</h1>
+  
+</section>
 
 
 <footer>
-    <a href="/about"> About </a>
+<a href="/about"> About </a>
 </footer>
 </body>
-</html>
 {{end}}
 
 

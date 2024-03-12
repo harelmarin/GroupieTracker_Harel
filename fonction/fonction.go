@@ -12,6 +12,7 @@ import (
 
 var DecodeData DataSearch
 
+// Struct de données pour récupérer les données envoyés par mon API
 type DataSearch []struct {
 	Translations struct {
 		Fra struct {
@@ -40,6 +41,7 @@ type SearchResults struct {
 // requête pour récupérer les données d'un pays via une recherche user (recherche en Français)
 func SearchCountry(usersearch string) []SearchResults {
 
+	// EndPoint + la recherche de l'utilisateur dans la barre
 	URLSearch := "https://restcountries.com/v3.1/translation/" + usersearch
 
 	//Init Client
@@ -73,6 +75,7 @@ func SearchCountry(usersearch string) []SearchResults {
 
 	}
 
+	// Bar de recherche qui recherche via un endpoint de mon API (récupération du nom en français)
 	var searchResults []SearchResults
 	for _, c := range DecodeData {
 		if strings.Contains(strings.ToLower(c.Translations.Fra.Common), strings.ToLower(usersearch)) {
@@ -85,6 +88,7 @@ func SearchCountry(usersearch string) []SearchResults {
 				IsFavorite:  bool(IsCountryFavorite(c.Translations.Fra.Common)),
 				Independent: bool(c.Independent),
 			}
+			// J'append les résultats pour les return
 			searchResults = append(searchResults, result)
 		}
 	}
@@ -95,6 +99,7 @@ func SearchCountry(usersearch string) []SearchResults {
 // requête pour récupérer les données des pays du continent choisi
 func GetContinent(categorie string) []SearchResults {
 
+	// Endpoint + continent selectionné
 	URLSearch := "https://restcountries.com/v3.1/region/" + categorie
 
 	//Init Client
@@ -125,8 +130,8 @@ func GetContinent(categorie string) []SearchResults {
 	if err := json.Unmarshal(body, &DecodeData); err != nil {
 		fmt.Println("Erreur lors du décodage des données JSON (Nom problablement incorrect)")
 		fmt.Println("Réponse JSON reçue:", string(body))
-
 	}
+
 	var searchResults []SearchResults
 	for _, c := range DecodeData {
 		result := SearchResults{
@@ -138,40 +143,14 @@ func GetContinent(categorie string) []SearchResults {
 			IsFavorite:  bool(IsCountryFavorite(c.Translations.Fra.Common)),
 			Independent: bool(c.Independent),
 		}
+		// J'append les résultats pour les return
 		searchResults = append(searchResults, result)
 	}
 	return searchResults
 
 }
 
-// Met des espaces tous les 3 nombres pour rendre le tout lisible
-func addThousandsSeparator(s string) string {
-	n := len(s)
-	if n <= 3 {
-		return s
-	}
-	return addThousandsSeparator(s[:n-3]) + " " + s[n-3:]
-}
-
-// Formate l'aire récuperé pour la rendre lisible facilement en enlevant les 0 après le "."
-func formatNumber(Number float64) string {
-
-	areaStr := fmt.Sprintf("%.0f", Number)
-
-	parts := strings.Split(areaStr, ".")
-
-	// Récupérer la partie entière
-	intPart := parts[0]
-
-	formattedIntPart := addThousandsSeparator(intPart)
-
-	if len(parts) > 1 {
-		return formattedIntPart + "." + parts[1]
-	}
-
-	return formattedIntPart
-}
-
+// Struct pour les filtres
 type FilterOptions struct {
 	Independent  bool
 	Alphabetical bool
@@ -201,8 +180,10 @@ func FilterCountries(countries []SearchResults, options FilterOptions) []SearchR
 	return countries
 }
 
+// Index
 func SearchIndex() []SearchResults {
 
+	// Affiche tous les pays où la langue française est parlée
 	URLSearch := "https://restcountries.com/v3.1/lang/French"
 
 	//Init Client
@@ -247,6 +228,7 @@ func SearchIndex() []SearchResults {
 			IsFavorite:  bool(IsCountryFavorite(c.Translations.Fra.Common)),
 			Independent: bool(c.Independent),
 		}
+		// Append les résultats
 		searchResults = append(searchResults, result)
 	}
 	return searchResults
@@ -298,6 +280,7 @@ func FilterAlphabetical(results []SearchResults) []SearchResults {
 	return filteredResults
 }
 
+// Permet de return les résultats paginé
 func GetPageResults(results []SearchResults, page int) []SearchResults {
 	startIndex := (page - 1) * 10
 	endIndex := startIndex + 10

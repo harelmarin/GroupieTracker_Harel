@@ -7,6 +7,7 @@ import (
 
 var Temp *template.Template
 
+// Init les modèles de template
 func InitTemplate() {
 	temp, errTemp := template.ParseGlob("./templates/*.html")
 	if errTemp != nil {

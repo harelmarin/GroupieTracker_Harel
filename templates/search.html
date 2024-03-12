@@ -35,7 +35,7 @@
         <input type="hidden" name="usersearch" value="{{.Usersearch}}">
         <label><input type="checkbox" name="independent" value="true"> Indépendant</label>
         <label><input type="checkbox" name="alphabetical" value="true"> A-Z</label>
-        <label> <input placeholder="min" type="input" name="min_population" value="" inputmode="numeric" autocomplete="off"> </label>
+        <label><input placeholder="min" type="input" name="min_population" value="" inputmode="numeric" autocomplete="off"> </label>
         <label><input placeholder="max" type="input" name="max_population" value="" inputmode="numeric" autocomplete="off"></label>
       
    
@@ -43,7 +43,7 @@
     </form>
 </section>
 
-<section class="container-global">
+<section class="container-global-search">
     {{if eq .Message ""}}
     {{range .Results}}
     <div class="container-country">
@@ -56,24 +56,7 @@
 <p>{{.Message}} </p>
     {{end}}
 </div>
-<div class="pagination"> 
-{{if eq .TotalPages 1}}
 
-    inzjbzbjzfjb
-   
-{{else}}
-    {{if gt .CurrentPage 1}}
-    <a class="button_slide_pagination " href="/search?usersearch={{.Usersearch}}&page={{.Prev}}">Page précédente</a>
-   {{end}}
-    {{if ne .TotalPages .CurrentPage}}
-    <a class="button_slide_pagination" href="/search?usersearch={{.Usersearch}}&page={{.Next}}" >Page suivante</a>
-    {{end}}
-    
-
-{{end}}
-</div>
-
-    
 </section>
 
 <footer>
