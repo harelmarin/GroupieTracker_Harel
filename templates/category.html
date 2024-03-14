@@ -34,7 +34,7 @@
             {{if eq .Message ""}}
             {{range .Results}}
             <div class="container-country">
-                <a href="/details?country={{.Name}}"> <img src="{{.Flag}}" alt="Flag"> </a>
+                <a href="/details?country={{.Name}}"> <img src="{{.Flag}}" alt="Flag">
             <h2>{{.Name}}</h2> </a>
             </div>
             {{end}}
@@ -55,8 +55,6 @@
                 {{if ne .TotalPages .CurrentPage}}
                 <a class="button_slide_pagination" href="/category?category={{.Category}}&page={{.Next}}" >Page suivante</a>
                 {{end}}
-                
-            
             {{end}}
             </div>
         </div>

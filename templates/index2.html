@@ -1,0 +1,50 @@
+{{define "index2"}}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content ="IE-edge">
+    <meta name="viewport" content="width=devicewidth, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/base.css" />
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">    
+    <title>INDEX</title>
+</head>
+<body>
+<header>
+
+    <nav>
+        <a class="cate-a"href="/category?category=africa"> Afrique </a>
+        <a class="cate-a"href="/category?category=america"> Amérique </a>
+        <a class="cate-a"href="/category?category=asia"> Asie </a>
+        <a class="cate-a"href="/category?category=europe"> Europe </a>
+        <a class="cate-a"href="/category?category=oceania"> Océanie </a>
+        </nav>
+    <div class="header-search-login">
+    <form action="/search" method="GET">
+    <input type="text" name="usersearch" autocomplete="off" placeholder="Search . . . ">
+    </form>
+    <a href="/favorite">  <div class="button_slide-header slide_right"> FAV   </div> </a>
+</div>
+</header>
+<section class="container-global">
+    {{range .}}
+    <div class="container-country">
+        <a href="/details?country={{.Name}}"> <img src="{{.Flag}}" alt="Flag"> 
+    <h2>{{.Name}}</h2>
+    </div>
+    {{end}}
+</section>
+
+
+<footer>
+    <a href="/about"> About </a>
+</footer>
+
+</body>
+{{end}}
+
+
+

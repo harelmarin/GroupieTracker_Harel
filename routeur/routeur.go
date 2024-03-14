@@ -16,19 +16,15 @@ func Serveur() {
 	http.HandleFunc("/category", controller.CateHandler)                           //Query => /category?category=""
 	http.HandleFunc("/details", controller.DetailsHandler)                         //Query => /details?country=""
 	http.HandleFunc("/favorite/treatment", controller.AddFavoriteTreatmentHandler) //Query => /favorite/treatment?country=""
-	http.HandleFunc("/favorite", controller.FavoriteHandler)
-	http.HandleFunc("/delete/treatment", controller.DeleteHandler) //Query => /delete/treatment?country=""
-	http.HandleFunc("/about", controller.AboutHandler)
-	http.HandleFunc("/error", controller.ErrorHandler)
+	http.HandleFunc("/favorite", controller.FavoriteHandler)                       //Handler qui affiche les favoris
+	http.HandleFunc("/delete/treatment", controller.DeleteHandler)                 //Query => /delete/treatment?country=""
+	http.HandleFunc("/about", controller.AboutHandler)                             //Page A propos
+	http.HandleFunc("/", controller.ErrorHandler)                                  //Error404
 
 	rootDoc, _ := os.Getwd()
 	fileserver := http.FileServer(http.Dir(rootDoc + "/asset"))
 	http.Handle("/static/", http.StripPrefix("/static/", fileserver))
 
-	// Gestionnaire pour les routes non trouvées (404)
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		http.Redirect(w, r, "/error", http.StatusNotFound)
-	})
 	// Lance le serveur
 	runServer()
 }

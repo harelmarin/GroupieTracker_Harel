@@ -7,7 +7,7 @@
 header {
     width: auto;
     height: 20vh;
-    background-color: #050505;
+    background-color: #161411;
     color: #fefefe;
     display: flex;
     align-items: center;
@@ -38,33 +38,34 @@ header a {
     color: #fefefe;
     border: #050505 1px solid;
     border-radius: 10px;
-    background-color: #262626;
+    background-color: #2f2929;
     padding: 10px;
     box-shadow: black;
 }
 
 .cate-a:hover{
     transform: scale(1.05);
-    background-color: #D80286;
+    background-color: #0467C4;
 }
 
 header input {
-    background-color: #050505;
+    background-color: #161411;
     border: 2px solid #fefefe;
     border-radius: 10px;
     color: #fefefe;
     padding: 5px;
     font-weight: 900;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 header input:hover {
     transform: scale(1.05);
-    border: 2px solid #D80286;
+    border: 2px solid #0467C4;
 }
 
 header input:focus {
     transform: scale(1.05);
-    border: 2px solid #D80286;
+    border: 2px solid #0467C4;
 }
 
 .header-search-login {
@@ -72,7 +73,7 @@ header input:focus {
     cursor: pointer;
 }
 body{
-    background-color: #050505;
+    background-color: #1E1B18;
     height: 70vh;
     color: #fefefe;
     height: fit-content;
@@ -84,7 +85,7 @@ footer {
     bottom: 0;
     width: 100%;
     height: 7vh;
-    background-color: #050505;
+    background-color: #161411;
     color: #fefefe;
     box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.90);
     display: flex;
@@ -106,6 +107,7 @@ footer a {
     
 }
 .container-country {
+    width: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -123,7 +125,7 @@ footer a {
     margin-top: 2.8vh;
     opacity: 0.9;
 }
-.container-country:hover img {
+.container-country img:hover {
     transform: scale(1.1);
 } 
 .container-country h2 {
@@ -154,7 +156,7 @@ footer a {
     background-color: #262626;
     border-radius: 10px;
     padding: 5vh;
-    box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.75);
+    box-shadow: #050505;
 }
 
 .container-details img {
@@ -190,7 +192,7 @@ footer a {
 .button_slide {
     width: 20vh;
     color: #FFF;
-    border: 2px solid rgb(216, 2, 134);
+    border: 2px solid #0467C4;
     border-radius: 0px;
     padding: 18px 36px;
     display: inline-block;
@@ -198,7 +200,7 @@ footer a {
     font-size: 14px;
     letter-spacing: 1px;
     cursor: pointer;
-    box-shadow: inset 0 0 0 0 #D80286;
+    box-shadow: inset 0 0 0 0 #0467C4;
     -webkit-transition: ease-out 0.4s;
     -moz-transition: ease-out 0.4s;
     transition: ease-out 0.4s;
@@ -206,7 +208,7 @@ footer a {
   }
 
   .slide_right:hover {
-    box-shadow: inset 400px 0 0 0 #D80286;
+    box-shadow: inset 400px 0 0 0 #0467C4;
   }
   
   #outer {
@@ -219,7 +221,7 @@ footer a {
     margin-left: 2vh;
     width: 5vh;
     color: #FFF;
-    border: 2px solid rgb(216, 2, 134);
+    border: 2px solid #0467C4;
     border-radius: 10px;
     padding: 9px 18px;
     display: inline-block;
@@ -227,7 +229,7 @@ footer a {
     font-size: 10px;
     letter-spacing: 1px;
     cursor: pointer;
-    box-shadow: inset 0 0 0 0 #D80286;
+    box-shadow: inset 0 0 0 0 #0467C4;
     -webkit-transition: ease-out 0.4s;
     -moz-transition: ease-out 0.4s;
     transition: ease-out 0.4s;
@@ -277,7 +279,7 @@ footer a {
     width: 20vh;
     background-color: #050505;
     color: #FFF;
-    border: 2px solid rgb(216, 2, 134);
+    border: 2px solid #0467C4;
     border-radius: 10px;
     padding: 9px 18px;
     display: inline-block;
@@ -285,7 +287,7 @@ footer a {
     font-size: 10px;
     letter-spacing: 1px;
     cursor: pointer;
-    box-shadow: inset 0 0 0 0 #D80286;
+    box-shadow: inset 0 0 0 0 #0467C4;
     -webkit-transition: ease-out 0.4s;
     -moz-transition: ease-out 0.4s;
     transition: ease-out 0.4s;
@@ -336,7 +338,7 @@ footer a {
     width: 20vh;
     background-color: #050505;
     color: #FFF;
-    border: 2px solid rgb(216, 2, 134);
+    border: 2px solid #0467C4;
     border-radius: 10px;
     padding: 9px 18px;
     display: inline-block;
@@ -344,7 +346,7 @@ footer a {
     font-size: 13px;
     letter-spacing: 1px;
     cursor: pointer;
-    box-shadow: inset 0 0 0 0 #D80286;
+    box-shadow: inset 0 0 0 0 #0467C4;
     -webkit-transition: ease-out 0.4s;
     -moz-transition: ease-out 0.4s;
     transition: ease-out 0.4s;
@@ -352,7 +354,8 @@ footer a {
  }
 
  .button_slide_pagination:hover {
-    box-shadow: inset 400px 0 0 0 #D80286;
+    box-shadow: inset 400px 0 0 0 #0467C4;
+    transform: scale(1.05);
   }
 
 .pagination-container {

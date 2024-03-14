@@ -47,8 +47,8 @@
     {{if eq .Message ""}}
     {{range .Results}}
     <div class="container-country">
-        <a href="/details?country={{.Name}}"> <img src="{{.Flag}}" alt="Flag">  </a>
-    <h2>{{.Name}}</h2>
+        <a href="/details?country={{.Name}}"> <img src="{{.Flag}}" alt="Flag"> 
+    <h2>{{.Name}}</h2> </a>
     </div>
     {{end}}
 {{else}}
