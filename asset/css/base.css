@@ -129,7 +129,7 @@ header {
 
 
 .header-little {
-    width: 100%;
+    width: 7vh;
     height: 7vh;
     position: fixed;
     display: flex;
@@ -172,6 +172,7 @@ header {
 }
 
 .container-index {
+    background-color: #121212;
     position: absolute;
     border-radius: 10px;
     top: 7vh; 
@@ -182,8 +183,9 @@ header {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
     padding-bottom: 15vh;
+    margin-right: 10vh;
 }
 
 .container-country {
@@ -193,8 +195,7 @@ header {
     justify-content: center;
     flex-direction: column;
     position: relative;
-    margin-right: 10vh;
-    margin-top:5vh;
+    margin-top:8vh;
 }
 .container-country img {
     width:30vh;
@@ -244,4 +245,16 @@ footer a {
     padding-bottom: 10px;
     text-decoration: none;
     color: #fefefe;
+}
+
+.container-about {
+    color: #fefefe;
+    background-color: #121212;
+    position: absolute;
+    border-radius: 10px;
+    top: 7vh; 
+    right: 0;
+    left: 60vh; 
+    max-height: fit-content;
+    height: fit-content;
 }
