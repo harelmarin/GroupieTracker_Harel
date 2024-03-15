@@ -33,6 +33,11 @@
     </div>
     <div class="container-recemmentvu"> 
         <h2> Derniers pays consultés </h2>
+        <div class="container-consults">
+        {{range .Consults}}
+        <a href="/details?country={{.Name}}&flag={{.Flag}}"> <img src="{{.Flag}}" alt="Flag"> 
+            {{end}} </a>
+        </div>
     </div>
     </section>
     <section class="header-little">
@@ -40,13 +45,14 @@
         <a href="/index"> <img src="/static/img/homeblanc.png">  </a>
         <a href="/favorite">  <img class="star"src="/static/img/star2.png"></a>
     </div>
+    <h2>RESTCOUNTRY</h2>
     </section>
 </header>
     <section class="container-index">
         {{if eq .Message ""}}
         {{range .Results}}
         <div class="container-country">
-            <a href="/details?country={{.Name}}"> <img src="{{.Flag}}" alt="Flag"> 
+            <a href="/details?country={{.Name}}&flag={{.Flag}}"> <img src="{{.Flag}}" alt="Flag"> 
         <h2>{{.Name}}</h2></a>
         </div>
         {{end}}
@@ -61,12 +67,10 @@
             
             {{else}}
                 {{if gt .CurrentPage 1}}
-                
                 <a  href="/category?category={{.Category}}&page={{.Prev}}">  <img src="/static/img/flechegauche.png"> </a>
-               
                {{end}}
+               <h2> {{.CurrentPage}} </h2>
                 {{if ne .TotalPages .CurrentPage}}
-               
                 <a  href="/category?category={{.Category}}&page={{.Next}}"> <img src="/static/img/flechedroite.png"> </a> 
                 
                 {{end}}

@@ -39,14 +39,22 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 		message = ""
 	}
 
+	consults, err := fonction.RetrieveConsult()
+	if err != nil {
+		http.Error(w, "Erreur lors de la récupération des Consults", http.StatusInternalServerError)
+		return
+	}
 	data := struct {
-		Message string
-		Results []fonction.SearchResults
+		Message  string
+		Results  []fonction.SearchResults
+		Consults []fonction.ConsultInfos
 	}{
 
-		Message: message,
-		Results: searchlangue,
+		Message:  message,
+		Results:  searchlangue,
+		Consults: consults,
 	}
+
 	InitTemplate.Temp.ExecuteTemplate(w, "index", data)
 }
 
@@ -78,12 +86,12 @@ func CateHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	totalResults := len(searchcategory)
-	nbPages := totalResults / 10
-	if totalResults%10 != 0 {
+	nbPages := totalResults / 15
+	if totalResults%15 != 0 {
 		nbPages++
 	}
-	startIndex := (pageNumber - 1) * 10
-	endIndex := startIndex + 10
+	startIndex := (pageNumber - 1) * 15
+	endIndex := startIndex + 15
 	if endIndex > totalResults {
 		endIndex = totalResults
 	}
@@ -100,6 +108,11 @@ func CateHandler(w http.ResponseWriter, r *http.Request) {
 	Next := pageNumber + 1
 	Prev := pageNumber - 1
 
+	consults, err := fonction.RetrieveConsult()
+	if err != nil {
+		http.Error(w, "Erreur lors de la récupération des Consults", http.StatusInternalServerError)
+		return
+	}
 	// Structure de Data que je vais envoyer
 	data := struct {
 		Category    string
@@ -109,6 +122,7 @@ func CateHandler(w http.ResponseWriter, r *http.Request) {
 		TotalPages  int
 		Next        int
 		Prev        int
+		Consults    []fonction.ConsultInfos
 	}{
 		Category:    Category,
 		Results:     resultsPage,
@@ -117,6 +131,7 @@ func CateHandler(w http.ResponseWriter, r *http.Request) {
 		TotalPages:  nbPages,
 		Next:        Next,
 		Prev:        Prev,
+		Consults:    consults,
 	}
 
 	// Init avec les data
@@ -140,16 +155,22 @@ func RechercheHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		message = ""
 	}
-
+	consults, err := fonction.RetrieveConsult()
+	if err != nil {
+		http.Error(w, "Erreur lors de la récupération des Consults", http.StatusInternalServerError)
+		return
+	}
 	// Struct de data que je vais envoyer
 	data := struct {
 		Usersearch string
 		Message    string
 		Results    []fonction.SearchResults
+		Consults   []fonction.ConsultInfos
 	}{
 		Usersearch: usersearch,
 		Message:    message,
 		Results:    searchResults,
+		Consults:   consults,
 	}
 
 	// Init avec mes datas
@@ -160,15 +181,33 @@ func RechercheHandler(w http.ResponseWriter, r *http.Request) {
 func DetailsHandler(w http.ResponseWriter, r *http.Request) {
 	// Récupération du nom du pays dans la query pour l'afficher dans les détails après
 	countryname := r.URL.Query().Get("country")
+	flag := r.URL.Query().Get("flag")
 	Country := fonction.SearchCountry(countryname)
 	// Gestio d'erreur
 	if len(Country) == 0 {
 		http.Error(w, "Not Found: No results found", http.StatusNotFound)
 		return
 	}
+	Consult := fonction.ConsultInfos{
+		Name: countryname,
+		Flag: flag,
+	}
+	fonction.AddCOnsult(Consult)
+	consults, err := fonction.RetrieveConsult()
+	if err != nil {
+		http.Error(w, "Erreur lors de la récupération des Consults", http.StatusInternalServerError)
+		return
+	}
+	data := struct {
+		Results  []fonction.SearchResults
+		Consults []fonction.ConsultInfos
+	}{
+		Results:  Country,
+		Consults: consults,
+	}
 
 	// Init avec les datas du pays
-	InitTemplate.Temp.ExecuteTemplate(w, "details", Country)
+	InitTemplate.Temp.ExecuteTemplate(w, "details", data)
 }
 
 // Treatment pour ajouter les favoris dans le fichier Json
@@ -213,14 +252,20 @@ func FavoriteHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		message = ""
 	}
-
+	consults, err := fonction.RetrieveConsult()
+	if err != nil {
+		http.Error(w, "Erreur lors de la récupération des Consults", http.StatusInternalServerError)
+		return
+	}
 	// Struct de data qui sera envoyé
 	data := struct {
 		Favorite []fonction.FavoriteInfo
 		Message  string
+		Consults []fonction.ConsultInfos
 	}{
 		Favorite: favs,
 		Message:  message,
+		Consults: consults,
 	}
 	// Init et envoie des données vers le template
 	InitTemplate.Temp.ExecuteTemplate(w, "favorite", data)
@@ -242,12 +287,34 @@ func DeleteHandler(w http.ResponseWriter, r *http.Request) {
 
 // Template about avec toute la doc
 func AboutHandler(w http.ResponseWriter, r *http.Request) {
+	consults, err := fonction.RetrieveConsult()
+	if err != nil {
+		http.Error(w, "Erreur lors de la récupération des Consults", http.StatusInternalServerError)
+		return
+	}
+	// Struct de data qui sera envoyé
+	data := struct {
+		Consults []fonction.ConsultInfos
+	}{
 
-	InitTemplate.Temp.ExecuteTemplate(w, "about", nil)
+		Consults: consults,
+	}
+	InitTemplate.Temp.ExecuteTemplate(w, "about", data)
 }
 
 // Template Error404
 func ErrorHandler(w http.ResponseWriter, r *http.Request) {
+	consults, err := fonction.RetrieveConsult()
+	if err != nil {
+		http.Error(w, "Erreur lors de la récupération des Consults", http.StatusInternalServerError)
+		return
+	}
+	// Struct de data qui sera envoyé
+	data := struct {
+		Consults []fonction.ConsultInfos
+	}{
 
-	InitTemplate.Temp.ExecuteTemplate(w, "error", nil)
+		Consults: consults,
+	}
+	InitTemplate.Temp.ExecuteTemplate(w, "error", data)
 }

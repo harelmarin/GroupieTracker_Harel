@@ -175,10 +175,16 @@ func AddCOnsult(info ConsultInfos) {
 	if err != nil {
 		log.Fatal("log: retrieveArticles() error!\n", err)
 	}
-
+	for _, consult := range Consult {
+		if consult.Name == info.Name && consult.Flag == info.Flag {
+			return
+		}
+	}
 	// Ajouter le nouveau favori à la liste
 	Consult = append(Consult, info)
-
+	if len(Consult) > 10 {
+		Consult = Consult[1:]
+	}
 	// Enregistrer la liste mise à jour dans le fichier JSON
 	err = ChangeConsult(Consult)
 	if err != nil {

@@ -33,6 +33,11 @@
     </div>
     <div class="container-recemmentvu"> 
         <h2> Derniers pays consultés </h2>
+        <div class="container-consults">
+        {{range .Consults}}
+        <a href="/details?country={{.Name}}&flag={{.Flag}}"> <img src="{{.Flag}}" alt="Flag"> 
+            {{end}}</a>
+        </div>
     </div>
     </section>
     <section class="header-little">
@@ -40,6 +45,7 @@
         <a href="/index"> <img src="/static/img/homeblanc.png">  </a>
         <a href="/favorite">  <img class="star"src="/static/img/star2.png"></a>
     </div>
+    <h2>RESTCOUNTRY</h2>
     </section>
 </header>
 <section class="container-about">

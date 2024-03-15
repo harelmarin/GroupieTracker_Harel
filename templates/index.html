@@ -33,6 +33,11 @@
     </div>
     <div class="container-recemmentvu"> 
         <h2> Derniers pays consultés </h2>
+        <div class="container-consults">
+        {{range .Consults}}
+        <a href="/details?country={{.Name}}&flag={{.Flag}}"> <img src="{{.Flag}}" alt="Flag">  </a>
+            {{end}}
+        </div>
     </div>
     </section>
     <section class="header-little">
@@ -40,8 +45,10 @@
         <a href="/index"> <img src="/static/img/homeblanc.png">  </a>
         <a href="/favorite">  <img class="star"src="/static/img/star2.png"></a>
     </div>
+    <h2>RESTCOUNTRY</h2>
     </section>
 </header>
+
 <div class="message-index"> <h2> Parcourir tous les pays </h2>
 
 </div>
@@ -49,16 +56,17 @@
     <form action="/index" method="GET">
         <label><input type="checkbox" name="independent" value="true"> Indépendant</label>
         <label><input type="checkbox" name="alphabetical" value="true"> A-Z</label>
-        <label><input placeholder="min" type="input" name="min_population" value="" inputmode="numeric" autocomplete="off"> </label>
-        <label><input placeholder="max" type="input" name="max_population" value="" inputmode="numeric" autocomplete="off"></label>
+        <label><input placeholder="Population Min" type="input" name="min_population" value="" inputmode="numeric" autocomplete="off"> </label>
+        <label><input placeholder="Population Max" type="input" name="max_population" value="" inputmode="numeric" autocomplete="off"></label>
         <button type="submit">Filtrer</button>
     </form>
+
 </section>
 
 <section class="container-index-index">
     {{range .Results}}
     <div class="container-country">
-        <a href="/details?country={{.Name}}"> <img src="{{.Flag}}" alt="Flag"> 
+        <a href="/details?country={{.Name}}&flag={{.Flag}}"> <img src="{{.Flag}}" alt="Flag"> 
     <h2>{{.Name}}</h2></a>
     </div>
     {{end}}
