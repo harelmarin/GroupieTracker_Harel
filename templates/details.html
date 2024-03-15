@@ -6,30 +6,40 @@
     <meta http-equiv="X-UA-Compatible" content ="IE-edge">
     <meta name="viewport" content="width=devicewidth, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/base.css" />
-    <link rel="stylesheet" href="/static/css/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">    
-    <title>DETAILS</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">    
+    <title>Details</title>
 </head>
 <body>
+    
 <header>
-
-    <nav>
-        <a class="cate-a"href="/category?category=africa"> Afrique </a>
-        <a class="cate-a"href="/category?category=america"> Amérique </a>
-        <a class="cate-a"href="/category?category=asia"> Asie </a>
-        <a class="cate-a"href="/category?category=europe"> Europe </a>
-        <a class="cate-a"href="/category?category=oceania"> Océanie </a>
-        </nav>
-
-        <div class="header-search-login">
-            <form action="/search" method="GET">
-            <input type="text" name="usersearch" autocomplete="off" placeholder="Search . . . ">
-            </form>
-            <a href="/favorite">  <div class="button_slide-header slide_right"> FAV   </div> </a>
-        </div>
-
+    <section class="header-big"> 
+        <div class="container-home-search">
+        <form action="/search" method="GET">
+            <input type="text" name="usersearch" autocomplete="off" placeholder="Quel pays voulez-vous rechercher ? ">
+            <input type="hidden" name="page" value="1">
+    </div>
+    <div class="container-category"> 
+        <h2> Catégories</h2>
+        <nav>
+            <a class="cate-a"href="/category?category=africa"> Afrique </a>
+            <a class="cate-a"href="/category?category=america"> Amérique </a>
+            <a class="cate-a"href="/category?category=asia"> Asie </a>
+            <a class="cate-a"href="/category?category=europe"> Europe </a>
+            <a class="cate-a"href="/category?category=oceania"> Océanie </a>
+            </nav>
+    </div>
+    <div class="container-recemmentvu"> 
+        <h2> Derniers pays consultés </h2>
+    </div>
+    </section>
+    <section class="header-little">
+        <div class="container-home-fav">
+        <a href="/index"> <img src="/static/img/homeblanc.png">  </a>
+        <a href="/favorite">  <img class="star"src="/static/img/star2.png"></a>
+    </div>
+    </section>
 </header>
 <div class="details">
     <section class="container-details">
@@ -53,12 +63,11 @@
     </section>
 
 </div>
-
-
-
 <footer>
     <a href="/about"> About </a>
-    </footer>
-    </body>
-    {{end}}
-    
+</footer>
+</body>
+{{end}}
+
+
+

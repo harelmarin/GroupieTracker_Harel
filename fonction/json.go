@@ -18,6 +18,9 @@ type FavoriteInfo struct {
 	IsFavorite bool   `json:"isfavorite"`
 }
 
+type ConsultInfos struct {
+}
+
 // Constante pour le fichier Json
 var (
 	_, b, _, _ = runtime.Caller(0)

@@ -184,7 +184,7 @@ func FilterCountries(countries []SearchResults, options FilterOptions) []SearchR
 func SearchIndex() []SearchResults {
 
 	// Affiche tous les pays où la langue française est parlée
-	URLSearch := "https://restcountries.com/v3.1/lang/French"
+	URLSearch := "https://restcountries.com/v3.1/all"
 
 	//Init Client
 	httpClient := http.Client{

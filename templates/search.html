@@ -6,45 +6,45 @@
     <meta http-equiv="X-UA-Compatible" content ="IE-edge">
     <meta name="viewport" content="width=devicewidth, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/base.css" />
-    <link rel="stylesheet" href="/static/css/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">    
-    <title>SEARCH</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">    
+    <title>INDEX</title>
 </head>
 <body>
+    
 <header>
-
-    <nav>
-        <a class="cate-a"href="/category?category=africa"> Afrique </a>
-        <a class="cate-a"href="/category?category=america"> Amérique </a>
-        <a class="cate-a"href="/category?category=asia"> Asie </a>
-        <a class="cate-a"href="/category?category=europe"> Europe </a>
-        <a class="cate-a"href="/category?category=oceania"> Océanie </a>
-        </nav>
-        <div class="header-search-login">
-    <form action="/search" method="GET">
-    <input type="text" name="usersearch" autocomplete="off" placeholder="Search . . . ">
-    <input type="hidden" name="page" value="1">
-    <a href="/favorite">  <div class="button_slide-header slide_right"> FAV   </div> </a>
-    </form>
-        </div>
+    <section class="header-big"> 
+        <div class="container-home-search">
+        <form action="/search" method="GET">
+            <input type="text" name="usersearch" autocomplete="off" placeholder="Quel pays voulez-vous rechercher ? ">
+            <input type="hidden" name="page" value="1">
+    </div>
+    <div class="container-category"> 
+        <h2> Catégories</h2>
+        <nav>
+            <a class="cate-a"href="/category?category=africa"> Afrique </a>
+            <a class="cate-a"href="/category?category=america"> Amérique </a>
+            <a class="cate-a"href="/category?category=asia"> Asie </a>
+            <a class="cate-a"href="/category?category=europe"> Europe </a>
+            <a class="cate-a"href="/category?category=oceania"> Océanie </a>
+            </nav>
+    </div>
+    <div class="container-recemmentvu"> 
+        <h2> Derniers pays consultés </h2>
+    </div>
+    </section>
+    <section class="header-little">
+        <div class="container-home-fav">
+        <a href="/index"> <img src="/static/img/homeblanc.png">  </a>
+        <a href="/favorite">  <img class="star"src="/static/img/star2.png"></a>
+    </div>
+    </section>
 </header>
-<section class="filtre">
-    <form action="/search" method="GET">
-        <input type="hidden" name="usersearch" value="{{.Usersearch}}">
-        <label><input type="checkbox" name="independent" value="true"> Indépendant</label>
-        <label><input type="checkbox" name="alphabetical" value="true"> A-Z</label>
-        <label><input placeholder="min" type="input" name="min_population" value="" inputmode="numeric" autocomplete="off"> </label>
-        <label><input placeholder="max" type="input" name="max_population" value="" inputmode="numeric" autocomplete="off"></label>
-      
+{{if eq .Message ""}}
+<div class="message-index"> <h2> Votre Recherche : {{.Usersearch}}</h2></div>
+<section class="container-index">
    
-        <button class="button_slide-filter slide_right"type="submit">Filtrer</button>
-    </form>
-</section>
-
-<section class="container-global-search">
-    {{if eq .Message ""}}
     {{range .Results}}
     <div class="container-country">
         <a href="/details?country={{.Name}}"> <img src="{{.Flag}}" alt="Flag"> 
@@ -53,11 +53,13 @@
     {{end}}
 {{else}}
 <div class="container-message">
-<p>{{.Message}} </p>
+<h2>{{.Message}}</h2>
     {{end}}
 </div>
 
 </section>
+
+
 
 <footer>
     <a href="/about"> About </a>
