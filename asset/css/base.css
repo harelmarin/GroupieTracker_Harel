@@ -135,7 +135,7 @@ header {
 
 
 .header-little {
-    width: 80vh;
+    width: 130vh;
     height: 7vh;
     position: fixed;
     display: flex;
@@ -182,7 +182,7 @@ header {
     position: absolute;
     margin-top: 3vh;
     border-radius: 10px;
-    top: 7vh; 
+    top: 10vh; 
     right: 0;
     left: 60vh; 
     max-height: fit-content;
@@ -192,6 +192,22 @@ header {
     flex-wrap: wrap;
     justify-content: space-evenly;
     padding-bottom: 15vh;
+}
+.container-index-index {
+    position: absolute;
+    margin-top: 3vh;
+    border-radius: 10px;
+    top: 22vh; 
+    right: 0;
+    left: 60vh; 
+    max-height: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-bottom: 15vh;
+
 }
 .message-index {
     position: absolute;
@@ -216,11 +232,10 @@ header {
     margin-right: 2vh;
 }
 .container-country img {
-    width:30vh;
+    width: 30vh;
     height: 20vh;
     transition: opacity 0.3s ease;
     border-radius:10px;
-    margin-top: 5vh;
     opacity: 0.8;
 }
 .container-country img:hover {
@@ -325,10 +340,10 @@ footer a {
 }
 
 .container-details img {
-    width: 45vh;
-    height: 32vh;
+    width: 40vh;
+    height: 25vh;
     border-radius: 10px;
-   margin-right: 1vh;
+    margin-right: 1vh;
 }
 
 .container-details a {
@@ -350,14 +365,6 @@ footer a {
     align-items: center;
 }
 
-.container-global-fav {
-    position: absolute;
-    border-radius: 10px;
-    top: 8vh; 
-    right: 0;
-    left: 60vh;  
-}
-
 .container-message {
     color: #fefefe;
     background-color: #121212;
@@ -372,8 +379,31 @@ footer a {
     align-items: center;
 }
 
-.container-message-fav {
-    background-color: aqua;
+.filtre {
     color: #fefefe;
-    height: 5vh;
+    margin-top: 20px;
+    position: absolute;
+    top: 19vh; 
+    right: 0;
+    left: 64vh;
+    border-radius: 10px;
+}
+
+.filtre label {
+    margin-right: 2vh;
+}
+.filtre button {
+    color: #fefefe;
+    width: 15vh;
+    height: 3vh;
+    background-color: #262626;
+    cursor: pointer;
+}
+
+.filtre label {
+    cursor: pointer;
+}
+
+.filtre button:hover {
+    transform: scale(1.05);
 }

@@ -19,6 +19,7 @@
         <form action="/search" method="GET">
             <input type="text" name="usersearch" autocomplete="off" placeholder="Quel pays voulez-vous rechercher ? ">
             <input type="hidden" name="page" value="1">
+        </form>
     </div>
     <div class="container-category"> 
         <h2> Catégories</h2>
@@ -42,7 +43,9 @@
     </section>
 </header>
 {{if eq .Message ""}}
+
 <div class="message-index"> <h2> Votre Recherche : {{.Usersearch}}</h2></div>
+
 <section class="container-index">
    
     {{range .Results}}

@@ -19,6 +19,7 @@
         <form action="/search" method="GET">
             <input type="text" name="usersearch" autocomplete="off" placeholder="Quel pays voulez-vous rechercher ? ">
             <input type="hidden" name="page" value="1">
+        </form>
     </div>
     <div class="container-category"> 
         <h2> Catégories</h2>
@@ -41,9 +42,21 @@
     </div>
     </section>
 </header>
-<div class="message-index"> <h2> Parcourir tous les pays </h2></div>
-<section class="container-index">
-    {{range .}}
+<div class="message-index"> <h2> Parcourir tous les pays </h2>
+
+</div>
+<section class="filtre">
+    <form action="/index" method="GET">
+        <label><input type="checkbox" name="independent" value="true"> Indépendant</label>
+        <label><input type="checkbox" name="alphabetical" value="true"> A-Z</label>
+        <label><input placeholder="min" type="input" name="min_population" value="" inputmode="numeric" autocomplete="off"> </label>
+        <label><input placeholder="max" type="input" name="max_population" value="" inputmode="numeric" autocomplete="off"></label>
+        <button type="submit">Filtrer</button>
+    </form>
+</section>
+
+<section class="container-index-index">
+    {{range .Results}}
     <div class="container-country">
         <a href="/details?country={{.Name}}"> <img src="{{.Flag}}" alt="Flag"> 
     <h2>{{.Name}}</h2></a>

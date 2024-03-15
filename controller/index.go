@@ -10,7 +10,44 @@ import (
 // Handler pour afficher l'index du site
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	searchlangue := fonction.SearchIndex()
-	InitTemplate.Temp.ExecuteTemplate(w, "index", searchlangue)
+	independent := r.URL.Query().Get("independent")
+	alphabetical := r.URL.Query().Get("alphabetical")
+	minPopulation := r.URL.Query().Get("min_population")
+	maxPopulation := r.URL.Query().Get("max_population")
+
+	var message string
+
+	// Si independant est coché j'append les résultats correspondant par rapport à la recherche d'avant
+	if independent == "true" {
+		searchlangue = fonction.FilterIndependent(searchlangue)
+	}
+	// si A-Z est coché je garde les mêmes resultats mais en changeant l'ordre
+	if alphabetical == "true" {
+		searchlangue = fonction.FilterAlphabetical(searchlangue)
+	}
+	// Si un Min ou Max sont spécifiés je prends les résultats correspondant dans les résultats qu'ils me restent des autres filtres
+	if minPopulation != "" || maxPopulation != "" {
+		minPop, _ := strconv.Atoi(minPopulation)
+		maxPop, _ := strconv.Atoi(maxPopulation)
+		searchlangue = fonction.FilterByPopulation(searchlangue, minPop, maxPop)
+	}
+
+	// Message si les résultats = 0
+	if len(searchlangue) == 0 {
+		message = "Aucun résultat pour votre recherche"
+	} else {
+		message = ""
+	}
+
+	data := struct {
+		Message string
+		Results []fonction.SearchResults
+	}{
+
+		Message: message,
+		Results: searchlangue,
+	}
+	InitTemplate.Temp.ExecuteTemplate(w, "index", data)
 }
 
 func IndexTreatmentHandler(w http.ResponseWriter, r *http.Request) {
@@ -27,28 +64,8 @@ func CateHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	// Je récupère les données de la query dans mon handler pour les utiliser
 	Category := r.URL.Query().Get("category")
-	independent := r.URL.Query().Get("independent")
-	alphabetical := r.URL.Query().Get("alphabetical")
-	minPopulation := r.URL.Query().Get("min_population")
-	maxPopulation := r.URL.Query().Get("max_population")
 
 	searchcategory := fonction.GetContinent(Category)
-
-	// Si independant est coché j'append les résultats correspondant par rapport à la recherche d'avant
-	if independent == "true" {
-		searchcategory = fonction.FilterIndependent(searchcategory)
-	}
-	// si A-Z est coché je garde les mêmes resultats mais en changeant l'ordre
-	if alphabetical == "true" {
-		searchcategory = fonction.FilterAlphabetical(searchcategory)
-	}
-
-	// Si un Min ou Max sont spécifiés je prends les résultats correspondant dans les résultats qu'ils me restent des autres filtres
-	if minPopulation != "" || maxPopulation != "" {
-		minPop, _ := strconv.Atoi(minPopulation)
-		maxPop, _ := strconv.Atoi(maxPopulation)
-		searchcategory = fonction.FilterByPopulation(searchcategory, minPop, maxPop)
-	}
 
 	// Calcule le nombre de page par rapport au nombre de résultat
 	pageNumber := 1
@@ -113,28 +130,9 @@ func RechercheHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	// Je récupère les données de la query dans mon handler pour les utiliser
 	usersearch := r.URL.Query().Get("usersearch")
-	independent := r.URL.Query().Get("independent")
-	alphabetical := r.URL.Query().Get("alphabetical")
-	minPopulation := r.URL.Query().Get("min_population")
-	maxPopulation := r.URL.Query().Get("max_population")
 
 	searchResults := fonction.SearchCountry(usersearch)
 	var message string
-
-	// Si independant est coché j'append les résultats correspondant par rapport à la recherche d'avant
-	if independent == "true" {
-		searchResults = fonction.FilterIndependent(searchResults)
-	}
-	// si A-Z est coché je garde les mêmes resultats mais en changeant l'ordre
-	if alphabetical == "true" {
-		searchResults = fonction.FilterAlphabetical(searchResults)
-	}
-	// Si un Min ou Max sont spécifiés je prends les résultats correspondant dans les résultats qu'ils me restent des autres filtres
-	if minPopulation != "" || maxPopulation != "" {
-		minPop, _ := strconv.Atoi(minPopulation)
-		maxPop, _ := strconv.Atoi(maxPopulation)
-		searchResults = fonction.FilterByPopulation(searchResults, minPop, maxPop)
-	}
 
 	// Message si les résultats = 0
 	if len(searchResults) == 0 {
@@ -145,13 +143,9 @@ func RechercheHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Struct de data que je vais envoyer
 	data := struct {
-		Usersearch  string
-		Message     string
-		Results     []fonction.SearchResults
-		CurrentPage int
-		TotalPages  int
-		Next        int
-		Prev        int
+		Usersearch string
+		Message    string
+		Results    []fonction.SearchResults
 	}{
 		Usersearch: usersearch,
 		Message:    message,

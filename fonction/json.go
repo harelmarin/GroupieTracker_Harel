@@ -19,9 +19,11 @@ type FavoriteInfo struct {
 }
 
 type ConsultInfos struct {
+	Name string `json:"name"`
+	Flag string `json:"flag"`
 }
 
-// Constante pour le fichier Json
+// Constante pour le fichier Json Des favoris
 var (
 	_, b, _, _ = runtime.Caller(0)
 	path       = filepath.Dir(b) + "\\"
@@ -64,7 +66,7 @@ func ChangeFav(Fav []FavoriteInfo) error {
 	return nil
 }
 
-// Add an adventurer in Json
+// Add an Country in Json
 func AddFav(info FavoriteInfo) {
 	// Récupérer la liste des favoris actuelle
 	Fav, err := RetrieveFavorite()
@@ -121,4 +123,65 @@ func IsCountryFavorite(countryName string) bool {
 		}
 	}
 	return false
+}
+
+// COnstante pour le fichier Json des pays consultés
+var (
+	_, c, _, _ = runtime.Caller(0)
+	path2      = filepath.Dir(c) + "\\"
+)
+var jsonfile2 = path2 + "../content\\consult.json"
+
+// Lit le fichier Json pour retrouver toutes les infos des favoris
+func RetrieveConsult() ([]ConsultInfos, error) {
+	var Consult []ConsultInfos
+
+	data, err := os.ReadFile(jsonfile2)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(data) == 0 {
+		return Consult, nil
+	}
+
+	err = json.Unmarshal(data, &Consult)
+	if err != nil {
+		return nil, err
+	}
+
+	return Consult, nil
+}
+
+// ChangeFav écrit la liste de favoris dans le fichier JSON
+func ChangeConsult(Consult []ConsultInfos) error {
+	data, errJSON := json.Marshal(Consult)
+	if errJSON != nil {
+		return errJSON
+	}
+
+	errWrite := os.WriteFile(jsonfile2, data, 0666)
+	if errWrite != nil {
+		return errWrite
+	}
+
+	return nil
+}
+
+// Add an adventurer in Json
+func AddCOnsult(info ConsultInfos) {
+	// Récupérer la liste des favoris actuelle
+	Consult, err := RetrieveConsult()
+	if err != nil {
+		log.Fatal("log: retrieveArticles() error!\n", err)
+	}
+
+	// Ajouter le nouveau favori à la liste
+	Consult = append(Consult, info)
+
+	// Enregistrer la liste mise à jour dans le fichier JSON
+	err = ChangeConsult(Consult)
+	if err != nil {
+		log.Fatal("log: addArticle()\t WriteFile error!\n", err)
+	}
 }
