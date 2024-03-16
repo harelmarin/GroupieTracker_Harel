@@ -33,7 +33,7 @@
     </div>
     <div class="container-recemmentvu"> 
         <h2> Derniers pays consultés </h2>
-        <div classe="container-consults">
+        <div class="container-consults">
         {{range .Consults}}
         <a href="/details?country={{.Name}}&flag={{.Flag}}"> <img src="{{.Flag}}" alt="Flag"> 
             {{end}} </a>

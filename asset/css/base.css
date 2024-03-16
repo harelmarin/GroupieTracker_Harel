@@ -356,18 +356,21 @@ footer a {
     right: 0;
     left: 60vh; 
     height: 80vh;
+    width: 140vh;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 .container-details {
     display: flex;
     justify-content: space-around;
     width: fit-content;
     height: 28vh;
-    background-color: #121212;
     border-radius: 10px;
     padding: 5vh;
+    background-color: #121212;
     box-shadow: #050505;
+
 }
 
 .container-details img {
@@ -382,10 +385,42 @@ footer a {
     color: #fefefe;
 }
 .details-infos {
-    background-color: aqua;
-    margin: 0;
-    padding: 0;
-    gap: 0;
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.details-infos h2 {
+    font-size: 30px;
+    font-weight: bolder;
+}
+.details-infos h3 {
+    font-size: 18px;
+    font-weight: bolder;
+}
+.fav {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.fav img {
+    width: 5vh;
+    height: 5vh;
+}
+
+.Supprimer {
+    opacity: 1;
+}
+.Supprimer:hover {
+    opacity: 0.5;
+    transform: scale(0.90);
+}
+.Add {
+    opacity: 0.5;
+}
+.Add:hover {
+    opacity: 1;
+    transform: scale(1.05);
 }
 .container-error {
     color: #fefefe;

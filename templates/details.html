@@ -54,15 +54,18 @@
         {{ if eq $index 0 }}
         <img src="{{.Flag}}" alt="Flag">
         <div class="details-infos">
-            <h2>{{.Name}}</h2>
-            <h3>Continent : {{.Reg}} </h3><br>
-            <h3>Aire : {{.Area}} km² </h3><br>
-            <h3>Population : {{.Pop}} Habitants </h3><br>
+            <div class="fav">
             {{if .IsFavorite}}
-            <a href="/delete/treatment?country={{.Name}}&reg={{.Reg}}&area={{.Area}}&pop={{.Pop}}&flag={{.Flag}}"> <div class="button_slide slide_right"> Supprimer </div></a>
+            <a href="/delete/treatment?country={{.Name}}&reg={{.Reg}}&area={{.Area}}&pop={{.Pop}}&flag={{.Flag}}"> <div class="Supprimer"> <img src="/static/img/star2.png"></div></a>
             {{else}}
-           <a href="/favorite/treatment?country={{.Name}}&reg={{.Reg}}&area={{.Area}}&pop={{.Pop}}&flag={{.Flag}}"> <div class="button_slide slide_right"> Favoris </div></a>
+           <a href="/favorite/treatment?country={{.Name}}&reg={{.Reg}}&area={{.Area}}&pop={{.Pop}}&flag={{.Flag}}"> <div class="Add"> <img src="/static/img/star2.png"> </div></a>
             {{end}}
+        </div>
+            <h2>{{.Name}}</h2>
+            <h3>Continent : {{.Reg}} </h3>
+            <h3>Aire : {{.Area}} km² </h3>
+            <h3>Population : {{.Pop}} Habitants </h3>
+           
         </div>
         {{end}}
     {{end}}
