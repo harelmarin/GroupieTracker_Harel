@@ -299,6 +299,7 @@ footer {
     display: flex;
     justify-content: end;
     align-items: end;
+    justify-content: space-between;
 }
 
 footer a {
@@ -306,6 +307,16 @@ footer a {
     padding-bottom: 10px;
     text-decoration: none;
     color: #fefefe;
+    opacity: 0.7;
+}
+
+footer a:hover {
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+footer h2 {
+    padding-left: 20px;
 }
 
 .container-about {
