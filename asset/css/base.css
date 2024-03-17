@@ -319,17 +319,6 @@ footer h2 {
     padding-left: 20px;
 }
 
-.container-about {
-    color: #fefefe;
-    background-color: #121212;
-    position: absolute;
-    border-radius: 10px;
-    top: 7vh; 
-    right: 0;
-    left: 60vh; 
-    max-height: fit-content;
-    height: fit-content;
-}
 
 .pagination-container {
     position: absolute;
@@ -509,3 +498,44 @@ footer h2 {
     opacity: 1;
 }
 
+
+.container-about {
+    color: #fefefe;
+    background-color: #121212;
+    position: absolute;
+    border-radius: 10px;
+    top: 7vh; 
+    right: 0;
+    left: 60vh; 
+    max-height: fit-content;
+    height: fit-content;
+    padding-left: 40px;
+    padding-top: 50px;
+    padding-bottom: 15vh;
+}
+
+
+.container-about h1 {
+    font-size: 50px;
+    font-weight: bolder;
+}
+.container-about h2{
+    font-size: 30px;
+    padding-top: 60px;
+}
+.container-about h3 {
+    font-size: 20px;
+    padding-top: 35px;
+}
+
+.container-about nav {
+    padding-top: 20px;
+}
+
+.container-about li {
+    padding-top: 5px;
+}
+
+.container-about img {
+    padding-top: 20px;
+}
