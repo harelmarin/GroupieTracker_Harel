@@ -1,4 +1,4 @@
-{{define "index"}}
+{{define "mentions"}}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">    
-    <title>INDEX</title>
+    <title>Mentions</title>
 </head>
 <body>
     
@@ -35,8 +35,8 @@
         <h2> Derniers pays consultés </h2>
         <div class="container-consults">
         {{range .Consults}}
-        <a href="/details?country={{.Name}}&flag={{.Flag}}"> <img src="{{.Flag}}" alt="Flag">  </a>
-            {{end}}
+        <a href="/details?country={{.Name}}&flag={{.Flag}}"> <img src="{{.Flag}}" alt="Flag"> 
+            {{end}}</a>
         </div>
     </div>
     </section>
@@ -48,28 +48,33 @@
     <h2>RESTCOUNTRY</h2>
     </section>
 </header>
+<section class="container-about">
+    <h1> Mentions légales </h1>
 
-<div class="message-index"> <h2> Parcourir tous les pays </h2>
-
-</div>
-<section class="filtre">
-    <form action="/index" method="GET">
-        <label><input type="checkbox" name="independent" value="true"> Indépendant</label>
-        <label><input type="checkbox" name="alphabetical" value="true"> A-Z</label>
-        <label><input placeholder="Population Min" type="input" name="min_population" value="" inputmode="numeric" autocomplete="off"> </label>
-        <label><input placeholder="Population Max" type="input" name="max_population" value="" inputmode="numeric" autocomplete="off"></label>
-        <button type="submit">Filtrer</button>
-    </form>
-
-</section>
-
-<section class="container-index-index">
-    {{range .Results}}
-    <div class="container-country">
-        <a href="/details?country={{.Name}}&flag={{.Flag}}"> <img src="{{.Flag}}" alt="Flag"> 
-    <h2>{{.Name}}</h2></a>
-    </div>
-    {{end}}
+   <h2> Éditeur du site  </h2>
+    
+    Nom de l'entreprise : RestCountry
+    Adresse : 2 Rue le Corbusier
+    
+    <h2>Propriété intellectuelle </h2>
+    
+    Le contenu du site RestCountry, y compris mais sans s'y limiter, les textes, graphiques, logos, images, clips audio et vidéo, est la propriété exclusive de RestCountry et est protégé par les lois sur la propriété intellectuelle en vigueur.
+    
+    <h2>Responsabilité </h2>
+    
+    Bien que nous nous efforcions de fournir des informations exactes et à jour, nous ne garantissons en aucun cas l'exactitude, l'exhaustivité ou la pertinence du contenu publié sur le site RestCountry. En conséquence, nous déclinons toute responsabilité quant à l'utilisation qui pourrait être faite de ces informations.
+    
+    <h2> Liens externes </h2>
+    
+    Le site RestCountry peut contenir des liens vers des sites externes sur lesquels nous n'avons aucun contrôle. Par conséquent, nous déclinons toute responsabilité quant au contenu de ces sites tiers.
+    
+    <h2> Données personnelles </h2>
+    
+    Nous nous engageons à protéger vos données personnelles et votre vie privée. Pour plus d'informations sur notre politique de confidentialité et sur la manière dont nous collectons, utilisons et protégeons vos données personnelles, veuillez consulter notre politique de confidentialité.
+    
+    <h2> Modification des mentions légales </h2>
+    
+    Nous nous réservons le droit de modifier à tout moment les présentes mentions légales. Nous vous recommandons donc de les consulter régulièrement.
 </section>
 
 

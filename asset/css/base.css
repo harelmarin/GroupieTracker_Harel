@@ -319,7 +319,12 @@ footer h2 {
     padding-left: 20px;
 }
 
-
+.container-mentions {
+   padding-right: 20px;
+   padding-bottom: 10px;
+   font-size: 15px;
+}
+    
 .pagination-container {
     position: absolute;
     border-radius: 10px;

@@ -9,7 +9,13 @@ import (
 
 // Handler pour afficher l'index du site
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
-	searchlangue := fonction.SearchIndex()
+	searchlangue, err := fonction.SearchIndex()
+	if err != nil {
+		// En cas d'erreur, rediriger vers le template d'erreur
+		http.Error(w, "Erreur lors de la récupération des données", http.StatusInternalServerError)
+		http.Redirect(w, r, "/service", http.StatusSeeOther)
+
+	}
 	independent := r.URL.Query().Get("independent")
 	alphabetical := r.URL.Query().Get("alphabetical")
 	minPopulation := r.URL.Query().Get("min_population")
@@ -317,4 +323,37 @@ func ErrorHandler(w http.ResponseWriter, r *http.Request) {
 		Consults: consults,
 	}
 	InitTemplate.Temp.ExecuteTemplate(w, "error", data)
+}
+
+// Template Error404
+func ServiceHandler(w http.ResponseWriter, r *http.Request) {
+	consults, err := fonction.RetrieveConsult()
+	if err != nil {
+		http.Error(w, "Erreur lors de la récupération des Consults", http.StatusInternalServerError)
+		return
+	}
+	// Struct de data qui sera envoyé
+	data := struct {
+		Consults []fonction.ConsultInfos
+	}{
+
+		Consults: consults,
+	}
+	InitTemplate.Temp.ExecuteTemplate(w, "service", data)
+}
+
+func MentionsHandler(w http.ResponseWriter, r *http.Request) {
+	consults, err := fonction.RetrieveConsult()
+	if err != nil {
+		http.Error(w, "Erreur lors de la récupération des Consults", http.StatusInternalServerError)
+		return
+	}
+	// Struct de data qui sera envoyé
+	data := struct {
+		Consults []fonction.ConsultInfos
+	}{
+
+		Consults: consults,
+	}
+	InitTemplate.Temp.ExecuteTemplate(w, "mentions", data)
 }

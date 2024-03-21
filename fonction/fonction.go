@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"sort"
 	"strings"
 	"time"
 )
@@ -61,6 +60,7 @@ func SearchCountry(usersearch string) []SearchResults {
 	if errRes != nil {
 		fmt.Println("Erreur lors de la requête HTTP")
 	}
+
 	defer res.Body.Close()
 	//Lecture et Récup de la requête
 	body, errBody := io.ReadAll(res.Body)
@@ -156,32 +156,8 @@ type FilterOptions struct {
 	Alphabetical bool
 }
 
-// Fonction qui permet de filter mes pays en fonction des options cliqués
-func FilterCountries(countries []SearchResults, options FilterOptions) []SearchResults {
-
-	// Filtre par indépendance
-	if options.Independent {
-		var filteredCountries []SearchResults
-		for _, country := range countries {
-			if country.Independent {
-				filteredCountries = append(filteredCountries, country)
-			}
-		}
-		countries = filteredCountries
-	}
-
-	// Filtrer par ordre alphabétique
-	if options.Alphabetical {
-		sort.Slice(countries, func(i, j int) bool {
-			return countries[i].Name < countries[j].Name
-		})
-	}
-
-	return countries
-}
-
 // Index
-func SearchIndex() []SearchResults {
+func SearchIndex() ([]SearchResults, error) {
 
 	// Affiche tous les pays où la langue française est parlée
 	URLSearch := "https://restcountries.com/v3.1/all"
@@ -202,6 +178,7 @@ func SearchIndex() []SearchResults {
 	res, errRes := httpClient.Do(req)
 	if errRes != nil {
 		fmt.Println("Erreur lors de la requête HTTP")
+
 	}
 	defer res.Body.Close()
 	//Lecture et Récup de la requête
@@ -231,7 +208,7 @@ func SearchIndex() []SearchResults {
 		// Append les résultats
 		searchResults = append(searchResults, result)
 	}
-	return searchResults
+	return searchResults, nil
 
 }
 
