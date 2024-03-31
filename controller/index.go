@@ -13,7 +13,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		// En cas d'erreur, rediriger vers le template d'erreur
 		http.Error(w, "Erreur lors de la récupération des données", http.StatusInternalServerError)
-		http.Redirect(w, r, "/service", http.StatusSeeOther)
+		http.Redirect(w, r, "/error", http.StatusSeeOther)
 
 	}
 	independent := r.URL.Query().Get("independent")

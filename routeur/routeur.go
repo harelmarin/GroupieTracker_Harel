@@ -20,7 +20,6 @@ func Serveur() {
 	http.HandleFunc("/delete/treatment", controller.DeleteHandler)                 //Query => /delete/treatment?country=""
 	http.HandleFunc("/about", controller.AboutHandler)                             //Page A propos
 	http.HandleFunc("/", controller.ErrorHandler)                                  //Error404
-	http.HandleFunc("/service", controller.ErrorHandler)                           //ErrorAPI
 	http.HandleFunc("/mentions", controller.MentionsHandler)                       //Page des mentions légales
 
 	rootDoc, _ := os.Getwd()

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This Groupie_Tracker project is an assignment done in our second semester studying development. It shows some content from the RestCountry API in a golang server using ```net/http``` package.
+This Groupie_Tracker project is an assignment done in our second semester studying development. It shows some content from the RestCountries API (link : https://restcountries.com/) in a golang server using ```net/http``` package.
 
 This project was made by:
 

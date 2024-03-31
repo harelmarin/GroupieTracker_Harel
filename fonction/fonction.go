@@ -159,7 +159,7 @@ type FilterOptions struct {
 // Index
 func SearchIndex() ([]SearchResults, error) {
 
-	// Affiche tous les pays où la langue française est parlée
+	// Affiche tous les pays
 	URLSearch := "https://restcountries.com/v3.1/all"
 
 	//Init Client
@@ -170,14 +170,14 @@ func SearchIndex() ([]SearchResults, error) {
 	//Créer requête HTTP
 	req, errReq := http.NewRequest(http.MethodGet, URLSearch, nil)
 	if errReq != nil {
-		fmt.Println("Erreur avec la requête : ", errReq.Error())
+		return nil, fmt.Errorf("erreur avec la requête : %s", errReq.Error())
 
 	}
 
 	//Exécution HTTP
 	res, errRes := httpClient.Do(req)
 	if errRes != nil {
-		fmt.Println("Erreur lors de la requête HTTP")
+		return nil, fmt.Errorf("erreur lors de la requête HTTP : %s", errRes.Error())
 
 	}
 	defer res.Body.Close()
