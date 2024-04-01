@@ -26,7 +26,7 @@ go run main.go
 Then, it should display that:
 ```
 Server is running...
-If the navigator didn't open on its own, just go to  http://localhost:8080/  on your browser.
+If the navigator didn't open on its own, just go to  http://localhost:8080/index  on your browser.
 If you want to end the server, type 'stop' here :
 ```
 _Don't close the terminal, otherwise, the server will stop automatically._
